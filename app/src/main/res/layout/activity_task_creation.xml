@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,11 +11,11 @@
         android:id="@+id/descriptionLayout"
         android:layout_width="match_parent"
         android:layout_height="321dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="17dp"
-        tools:layout_editor_absoluteY="-12dp">
+        tools:layout_editor_absoluteY="-12dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <Spinner
             android:id="@+id/monthSpinner"
@@ -34,20 +34,6 @@
             android:layout_marginLeft="23dp"
             android:layout_marginStart="23dp" />
 
-        <TextView
-            android:id="@+id/dueDateID"
-            android:layout_width="170dp"
-            android:layout_height="28dp"
-            android:layout_above="@+id/daySpinner"
-            android:layout_alignLeft="@+id/daySpinner"
-            android:layout_alignStart="@+id/daySpinner"
-            android:layout_marginBottom="14dp"
-            android:text="Due date"
-            android:textAlignment="gravity"
-            android:textSize="18sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="262dp" />
-
         <Spinner
             android:id="@+id/yearSpinner"
             android:layout_width="wrap_content"
@@ -62,15 +48,15 @@
             android:id="@+id/assignedToText"
             android:layout_width="99dp"
             android:layout_height="47dp"
-            android:layout_marginBottom="21dp"
             android:text="AssignedTo"
             android:textAlignment="center"
             android:textSize="18sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="185dp"
-            android:layout_above="@+id/dueDateID"
-            android:layout_alignLeft="@+id/dueDateID"
-            android:layout_alignStart="@+id/dueDateID" />
+            android:layout_marginTop="37dp"
+            android:layout_below="@+id/taskDescription"
+            android:layout_alignLeft="@+id/taskDescription"
+            android:layout_alignStart="@+id/taskDescription" />
 
         <Spinner
 
@@ -80,6 +66,36 @@
             android:layout_alignEnd="@+id/taskDescription"
             android:layout_alignRight="@+id/taskDescription"
             android:layout_alignTop="@+id/assignedToText" />
+
+        <TextView
+            android:id="@+id/yearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Year :"
+            android:textSize="16sp"
+            android:layout_above="@+id/yearSpinner"
+            android:layout_alignLeft="@+id/yearSpinner"
+            android:layout_alignStart="@+id/yearSpinner" />
+
+        <TextView
+            android:id="@+id/dayText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/daySpinner"
+            android:layout_alignLeft="@+id/daySpinner"
+            android:layout_alignStart="@+id/daySpinner"
+            android:text="Day :"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/monthText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/monthSpinner"
+            android:layout_alignLeft="@+id/monthSpinner"
+            android:layout_alignStart="@+id/monthSpinner"
+            android:text="Month : "
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/taskDescription"
@@ -108,13 +124,30 @@
             tools:layout_editor_absoluteX="85dp"
             tools:layout_editor_absoluteY="43dp" />
 
+        <TextView
+            android:id="@+id/dueDateID"
+            android:layout_width="170dp"
+            android:layout_height="28dp"
+            android:layout_alignLeft="@+id/daySpinner"
+            android:layout_alignStart="@+id/daySpinner"
+            android:layout_below="@+id/userSpinner"
+            android:text="Due date :"
+            android:textAlignment="gravity"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="262dp" />
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="-15dp"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/descriptionLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -158,4 +191,4 @@
 
     </RelativeLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

@@ -88,18 +88,18 @@ public class TaskCreation extends AppCompatActivity {
     public void addMonth(){
         Spinner monthSpinner = (Spinner) findViewById(R.id.monthSpinner);
         List<String> list= new ArrayList<String>();
-        list.add("Janvier");
-        list.add("Fevrier");
-        list.add("Mars");
-        list.add("Avril");
-        list.add("Mai");
-        list.add("Juin");
-        list.add("Juillet");
-        list.add(("Aout"));
-        list.add("Septembre");
-        list.add("Octobre");
-        list.add("Novembre");
-        list.add("Decembre");
+        list.add("01");
+        list.add("02");
+        list.add("03");
+        list.add("04");
+        list.add("05");
+        list.add("06");
+        list.add("07");
+        list.add("08");
+        list.add("09");
+        list.add("10");
+        list.add("11");
+        list.add("12");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
 
