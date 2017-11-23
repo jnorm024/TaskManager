@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jeremynormandin.taskmanager.TaskCreation">
+
+    <RelativeLayout
+        android:id="@+id/descriptionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="321dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        tools:layout_editor_absoluteX="17dp"
+        tools:layout_editor_absoluteY="-12dp">
+
+        <Spinner
+            android:id="@+id/monthSpinner"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+        <Spinner
+            android:id="@+id/daySpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp" />
+
+        <TextView
+            android:id="@+id/dueDateID"
+            android:layout_width="170dp"
+            android:layout_height="28dp"
+            android:layout_above="@+id/daySpinner"
+            android:layout_alignLeft="@+id/daySpinner"
+            android:layout_alignStart="@+id/daySpinner"
+            android:layout_marginBottom="14dp"
+            android:text="Due date"
+            android:textAlignment="gravity"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="262dp" />
+
+        <Spinner
+            android:id="@+id/yearSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp" />
+
+        <TextView
+            android:id="@+id/assignedToText"
+            android:layout_width="99dp"
+            android:layout_height="47dp"
+            android:layout_marginBottom="21dp"
+            android:text="AssignedTo"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="185dp"
+            android:layout_above="@+id/dueDateID"
+            android:layout_alignLeft="@+id/dueDateID"
+            android:layout_alignStart="@+id/dueDateID" />
+
+        <Spinner
+
+            android:id="@+id/userSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_alignEnd="@+id/taskDescription"
+            android:layout_alignRight="@+id/taskDescription"
+            android:layout_alignTop="@+id/assignedToText" />
+
+        <EditText
+            android:id="@+id/taskDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/taskName"
+            android:layout_alignStart="@+id/taskName"
+            android:layout_below="@+id/taskName"
+            android:layout_marginTop="11dp"
+            android:ems="10"
+            android:hint="Detail"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="106dp" />
+
+        <EditText
+            android:id="@+id/taskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="43dp"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="43dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <CheckBox
+                android:id="@+id/repetitiveTask"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="14dp"
+                android:text="Repetitive Task"
+                tools:layout_editor_absoluteX="199dp"
+                tools:layout_editor_absoluteY="370dp" />
+
+            <Button
+                android:id="@+id/createTaskButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:text="Create" />
+
+            <Button
+                android:id="@+id/addRewardButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="Add a reward"
+                tools:layout_editor_absoluteX="130dp"
+                tools:layout_editor_absoluteY="436dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
