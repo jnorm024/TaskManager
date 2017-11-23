@@ -27,7 +27,8 @@
         <activity android:name=".NewUser" />
         <activity android:name=".createReward" />
         <activity android:name=".viewReward" />
-        <activity android:name=".PrincipalActivity"></activity>
+        <activity android:name=".PrincipalActivity" />
+        <activity android:name=".giveRewards"></activity>
     </application>
 
 </manifest>
