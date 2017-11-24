@@ -22,7 +22,7 @@ public class TaskCreation extends AppCompatActivity {
         Button addRewardButton= (Button) findViewById(R.id.addRewardButton);
         addRewardButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(TaskCreation.this, createReward.class));
+                startActivity(new Intent(TaskCreation.this, com.example.jeremynormandin.taskmanager.createReward.class));
 
             }
         });
