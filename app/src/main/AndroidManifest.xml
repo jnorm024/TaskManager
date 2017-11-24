@@ -26,9 +26,8 @@
         <activity android:name=".TaskCreation" />
         <activity android:name=".NewUser" />
         <activity android:name=".createReward" />
-        <activity android:name=".viewReward" />
         <activity android:name=".PrincipalActivity" />
-        <activity android:name=".giveRewards"></activity>
+        <activity android:name="com.example.taskmanager.giveRewards"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
-package com.example.jeremynormandin.taskmanager;
+package com.example.taskmanager;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.jeremynormandin.taskmanager.R;
 
 public class giveRewards extends AppCompatActivity {
 

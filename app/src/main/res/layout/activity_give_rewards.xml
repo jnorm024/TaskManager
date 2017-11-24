@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jeremynormandin.taskmanager.giveRewards">
+    tools:context="com.example.jeremynormandin.taskmanager.com.example.taskmanager.giveRewards">
 
     <TextView
         android:id="@+id/rewardDesc"
