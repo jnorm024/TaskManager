@@ -1,20 +1,28 @@
-package com.example.taskmanager;
+package com.example.jeremynormandin.taskmanager;
 
 /**
  * Created by amand on 2017-11-24.
  */
 
 public class Task {
-    static String name;
-    static String details;
-    static boolean isBonus;
-    static boolean isAssigned;
-     //Guillaume quand tu sauras si on peut mettre des Date
-    static String dueDate;
-    static boolean isAccomplished;
-    static boolean rewardClaimed;
-    static boolean isRepeated;
+    private String taskId;
+    private String name;
+    private String details;
+    private boolean isBonus;
+    private boolean isAssigned;
+    private String dueDate;
+    private boolean isAccomplished;
+    private boolean rewardClaimed;
+    private boolean isRepeated;
 
+    public Task(String taskId, String name, String details, String dueDate) {
+        this.taskId = taskId;
+        this.name = name;
+        this.details = details;
+        this.dueDate = dueDate;
+    }
+
+    public String getTaskId() {return this.taskId;}
     public String getName(){
         return this.name;
     }

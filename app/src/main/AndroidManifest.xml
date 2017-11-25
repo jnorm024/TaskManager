@@ -27,7 +27,7 @@
         <activity android:name=".NewUser" />
         <activity android:name=".createReward" />
         <activity android:name=".PrincipalActivity" />
-        <activity android:name="com.example.taskmanager.giveRewards"></activity>
+        <activity android:name="com.example.jeremynormandin.taskmanager.giveRewards"></activity>
     </application>
 
 </manifest>
