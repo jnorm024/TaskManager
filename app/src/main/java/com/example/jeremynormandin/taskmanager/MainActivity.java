@@ -10,17 +10,23 @@ import android.widget.Button;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
-    DatabaseReference databaseTasksManagement;
+    static DatabaseReference databaseTasksManagement;
+    static DatabaseReference usersRef;
+    static DatabaseReference tasksRef;
+    static DatabaseReference rewardsRef;
 
-    List<User> users;
-    List<Task> tasks;
-    List<Reward> rewards;
+    static List<User> users;
+    static List<Task> tasks;
+    static List<Reward> rewards;
 
 
     @Override
@@ -29,6 +35,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        users = new ArrayList<>();
+
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        usersRef = databaseTasksManagement.child("users");
+        usersRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //Get map of users in datasnapshot
+                        collectUsers((Map<String,Object>) dataSnapshot.getValue());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+        //tasksRef = databaseTasksManagement.child("tasks");
+        //rewardsRef = databaseTasksManagement.child("rewards");
 
 
 
@@ -50,33 +76,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void collectUsers(Map<String,Object> users) {
+
+        //iterate through each user, ignoring their UID
+        for (Map.Entry<String, Object> entry : users.entrySet()){
+
+            //Get user map
+            Map singleUser = (Map) entry.getValue();
+            //Get phone field and append to list
+            this.users.add((User) singleUser);
+        }
+    }
+
+    public static void addUserToDatabase (String name, String password, boolean isParent) {
+        //getting a unique id using push().getKey() method
+        //it will create a unique id and we will use it as the Primary Key for our Product
+        String id = usersRef.push().getKey();
+
+        //creating an Product Object
+        User newUser;
+        if(!isParent) newUser = new User(id, name, password);
+        else newUser = new Parent(id, name, password);
+
+
+        //Saving the Product
+        usersRef.child(id).setValue(newUser);
+    }
+
+
     @Override
     protected void onStart() {
         super.onStart();
         //attaching value event listener
-        databaseTasksManagement.addValueEventListener(new ValueEventListener() {
+        usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                /*
 
-                This stuff is gonna need to be deleted, copy-pasted from lab code
-
-                //clearing the previous artist list
-                products.clear();
-
-                //iterating through all the nodes
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting product
-                    Product product = postSnapshot.getValue(Product.class);
-                    //adding product to the list
-                    products.add(product);
-                }
-
-                //creating adapter
-                ProductList productsAdapter = new ProductList(MainActivity.this, products);
-                //attaching adapter to the listview
-                listViewProducts.setAdapter(productsAdapter);
-                */
             }
 
             @Override

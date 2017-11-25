@@ -3,29 +3,26 @@ package com.example.jeremynormandin.taskmanager;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -207,12 +204,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        boolean isValid = false;
+        for(User user : MainActivity.users) {
+            if(email == user.getName()) isValid = true;
+        }
+        return isValid;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        boolean isValid = false;
+        for(User user : MainActivity.users) {
+            if(password == user.getPassword()) isValid = true;
+        }
+        return isValid;
     }
 
     /**
@@ -322,7 +327,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+            /*
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -337,7 +342,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
-
+            */
             // TODO: register the new account here.
             return true;
         }
