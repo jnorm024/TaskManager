@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jeremynormandin.taskmanager.com.example.taskmanager.giveRewards">
+    tools:context="com.example.jeremynormandin.taskmanager.giveRewards">
 
     <TextView
         android:id="@+id/rewardDesc"
@@ -32,7 +32,7 @@
         android:layout_height="50dp"
         android:layout_below="@+id/rewardDesc"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="79dp"
+        android:layout_marginTop="78dp"
         android:background="@drawable/round_button"
         android:text="Give reward" />
 
