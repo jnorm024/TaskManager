@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,7 +102,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         Button toMain = (Button) findViewById(R.id.toMainContent);
         toMain.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
+                /* à rechanger pour MainActivity.class quand la base de données fonctionne
+
+                */
                 startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+
+
             }
         });
     }
