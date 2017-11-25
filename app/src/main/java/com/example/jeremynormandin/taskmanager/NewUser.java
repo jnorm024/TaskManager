@@ -1,5 +1,6 @@
 package com.example.jeremynormandin.taskmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -9,7 +10,21 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class NewUser extends AppCompatActivity {
+
+    private DatabaseReference databaseTasksManagement;
+    private DatabaseReference usersRef;
+
+    List<User> users;
 
     EditText nameText;
     EditText passwordText;
@@ -28,8 +43,34 @@ public class NewUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 addUser();
+                startActivity(new Intent(NewUser.this, LoginActivity.class));
             }
         });
+
+        users = new ArrayList<>();
+
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        usersRef = databaseTasksManagement.child("users");
+        usersRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //clear previous user list
+                        users.clear();
+                        //access to all user in the database
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //getting user
+                            User user = postSnapshot.getValue(User.class);
+                            //adding user to the list
+                            users.add(user);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
     }
 
     private void addUser() {
@@ -40,11 +81,24 @@ public class NewUser extends AppCompatActivity {
 
         //checking if the value is provided
         if (!TextUtils.isEmpty(name)) {
-
-            MainActivity.addUserToDatabase(name,password,parent);
             //setting edittext to blank again
             nameText.setText("");
             passwordText.setText("");
+
+            //getting a unique id using push().getKey() method
+            //it will create a unique id and we will use it as the Primary Key for our User
+            String id = usersRef.push().getKey();
+
+            //creating a new User Object
+            User newUser;
+            if(!parent) newUser = new User(id, name, password);
+            else newUser = new Parent(id, name, password);
+
+
+            //Saving the user
+            usersRef.child(id).setValue(newUser);
+            //add new user to user list
+            users.add(newUser);
 
             //displaying a success toast
             Toast.makeText(this, "User added", Toast.LENGTH_LONG).show();

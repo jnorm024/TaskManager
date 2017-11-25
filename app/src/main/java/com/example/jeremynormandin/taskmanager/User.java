@@ -10,6 +10,8 @@ public class User {
     private String password;
     private boolean isParent = false;
 
+    public User() {}
+
     public User(String userId, String name, String password){
         this.userId = userId;
         this.name = name;

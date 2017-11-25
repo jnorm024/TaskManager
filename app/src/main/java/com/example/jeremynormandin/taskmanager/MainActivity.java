@@ -3,19 +3,12 @@ package com.example.jeremynormandin.taskmanager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+/*
         users = new ArrayList<>();
 
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
@@ -59,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+*/
         Button newTask = (Button) findViewById(R.id.addNewTask);
         newTask.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
@@ -75,51 +68,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void collectUsers(Map<String,Object> users) {
-
-        //iterate through each user, ignoring their UID
-        for (Map.Entry<String, Object> entry : users.entrySet()){
-
-            //Get user map
-            Map singleUser = (Map) entry.getValue();
-            //Get phone field and append to list
-            this.users.add((User) singleUser);
-        }
-    }
-
-    public static void addUserToDatabase (String name, String password, boolean isParent) {
-        //getting a unique id using push().getKey() method
-        //it will create a unique id and we will use it as the Primary Key for our Product
-        String id = usersRef.push().getKey();
-
-        //creating an Product Object
-        User newUser;
-        if(!isParent) newUser = new User(id, name, password);
-        else newUser = new Parent(id, name, password);
-
-
-        //Saving the Product
-        usersRef.child(id).setValue(newUser);
-    }
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        //attaching value event listener
-        usersRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
     }
 
 }

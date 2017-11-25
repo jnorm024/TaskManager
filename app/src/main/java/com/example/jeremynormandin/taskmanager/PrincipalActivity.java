@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class PrincipalActivity extends AppCompatActivity {
 
+    private static User loginUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,14 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public static void setLoginUser(User user) {
+        loginUser = user;
+    }
+
+    public static User getLoginUser() {
+        return loginUser;
     }
 
 }

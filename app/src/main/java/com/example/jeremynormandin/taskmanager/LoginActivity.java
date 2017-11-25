@@ -17,7 +17,6 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,7 +26,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.security.Principal;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,17 +43,17 @@ import static android.Manifest.permission.READ_CONTACTS;
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
     /**
+     * database and users list
+     */
+    private DatabaseReference databaseTasksManagement;
+    private DatabaseReference usersRef;
+
+    List<User> users;
+
+    /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
-
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -69,12 +73,42 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView = (EditText) findViewById(R.id.user);
         populateAutoComplete();
 
+        /**
+         * here I add my own code to implement the database
+         */
+        users = new ArrayList<>();
+
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        usersRef = databaseTasksManagement.child("users");
+        usersRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //clear previous user list
+                        users.clear();
+                        //access to all user in database
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //getting user
+                            User user =  postSnapshot.getValue(User.class);
+                            System.out.println(user.getPassword());
+                            //adding user to the list
+                            users.add(user);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+
+
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.password || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
+                    //attemptLogin();
                     return true;
                 }
                 return false;
@@ -85,7 +119,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
+                //attemptLogin();
+                String email = mEmailView.getText().toString().trim();
+                String password = mPasswordView.getText().toString().trim();
+                if(isValid(email, password)) {
+                    startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                }
             }
         });
 
@@ -160,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
-     */
+     */ /*
     private void attemptLogin() {
         if (mAuthTask != null) {
             return;
@@ -207,23 +246,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
     }
+    */
 
-    private boolean isEmailValid(String email) {
+    /**
+     * Verify if the userName and password are valid
+     * @param email
+     * @param password
+     * @return
+     */
+    private boolean isValid(String email, String password) {
         //TODO: Replace this with your own logic
-        boolean isValid = false;
-        for(User user : MainActivity.users) {
-            if(email == user.getName()) isValid = true;
-        }
-        return isValid;
-    }
+        boolean isValid;
+        for(User user : users) {
+            if(user.getName().length()==email.length() || user.getPassword().length()==password.length()){
+                isValid = true;
+                for (int i = 0; i < email.length(); i++) {
+                    if (email.charAt(i) != user.getName().charAt(i)) isValid = false;
+                }
+                for (int i = 0; i < password.length(); i++) {
+                    if (password.charAt(i) != user.getPassword().charAt(i)) isValid = false;
+                }
 
-    private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
-        boolean isValid = false;
-        for(User user : MainActivity.users) {
-            if(password == user.getPassword()) isValid = true;
+                if(isValid == true) {
+                    PrincipalActivity.setLoginUser(user);
+                    return true;
+                }
+            }
         }
-        return isValid;
+        return false;
     }
 
     /**
@@ -372,7 +422,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
-
 
 }
 
