@@ -8,18 +8,23 @@ public class Task {
     private String taskId;
     private String name;
     private String details;
-    private boolean isBonus;
-    private boolean isAssigned;
+    private boolean isAssigned = false;
     private String dueDate;
-    private boolean isAccomplished;
-    private boolean rewardClaimed;
+    private boolean isAccomplished = false;
+    private boolean rewardClaimed = false;
     private boolean isRepeated;
 
-    public Task(String taskId, String name, String details, String dueDate) {
+    private String assignedUserId;
+    private String associatedRewardId;
+
+    public Task() {}
+
+    public Task(String taskId, String name, String details, String dueDate, boolean isRepeated) {
         this.taskId = taskId;
         this.name = name;
         this.details = details;
         this.dueDate = dueDate;
+        this.isRepeated = isRepeated;
     }
 
     public String getTaskId() {return this.taskId;}
@@ -28,9 +33,6 @@ public class Task {
     }
     public String getDetails(){
         return this.details;
-    }
-    public boolean getIsBonus(){
-        return this.isBonus;
     }
     public boolean getIsAssigned(){
         return this.isAssigned;
@@ -46,5 +48,21 @@ public class Task {
     }
     public boolean getIsRepeated(){
         return this.isRepeated;
+    }
+    public String getAssignedUserId() {return this.assignedUserId;}
+    public String getAssociatedRewardId() {return this.associatedRewardId;}
+
+    public void setAssignedUserId(String id) {
+        isAssigned = true;
+        assignedUserId = id;
+    }
+    public void setAssociatedRewardId(String id) {
+        associatedRewardId = id;
+    }
+    public void setAccomplished() {
+        isAccomplished = true;
+    }
+    public void setRewardClaimed() {
+        rewardClaimed = true;
     }
 }

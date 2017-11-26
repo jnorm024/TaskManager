@@ -7,9 +7,10 @@ package com.example.jeremynormandin.taskmanager;
 public class Parent extends User {
     private boolean isParent = true;
 
-    public Parent(String userId, String name, String password) {
-        super(userId, name, password);
+    public Parent(String userId, String name, String password, boolean isParent) {
+        super(userId, name, password, isParent );
     }
+    public boolean getIsParent() {return isParent;}
 
 
 }

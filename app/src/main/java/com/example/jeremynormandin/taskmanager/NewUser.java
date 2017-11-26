@@ -91,8 +91,8 @@ public class NewUser extends AppCompatActivity {
 
             //creating a new User Object
             User newUser;
-            if(!parent) newUser = new User(id, name, password);
-            else newUser = new Parent(id, name, password);
+            newUser = new User(id, name, password, parent);
+
 
 
             //Saving the user

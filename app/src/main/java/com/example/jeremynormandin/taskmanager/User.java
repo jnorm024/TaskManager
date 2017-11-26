@@ -8,14 +8,15 @@ public class User {
     private String userId;
     private String name;
     private String password;
-    private boolean isParent = false;
+    private boolean isParent;
 
     public User() {}
 
-    public User(String userId, String name, String password){
+    public User(String userId, String name, String password, boolean isParent){
         this.userId = userId;
         this.name = name;
         this.password = password;
+        this.isParent = isParent;
     }
 
     public String getUserId() {return this.userId;}
@@ -25,5 +26,5 @@ public class User {
     public String getPassword(){
         return this.password;
     }
-    public boolean getIsParent() {return this.isParent;}
+    public boolean getIsParent() {return isParent;}
 }

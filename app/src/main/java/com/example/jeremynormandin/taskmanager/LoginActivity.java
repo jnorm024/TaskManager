@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference usersRef;
 
-    List<User> users;
+    static List<User> users;
 
     /**
      * Id to identity READ_CONTACTS permission request.
@@ -90,7 +90,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             //getting user
                             User user =  postSnapshot.getValue(User.class);
-                            System.out.println(user.getPassword());
                             //adding user to the list
                             users.add(user);
                         }

@@ -175,7 +175,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="16dp"
-                android:text="Create" />
+                android:text="CREATE" />
 
             <Button
                 android:id="@+id/addRewardButton"
@@ -183,7 +183,7 @@
                 android:layout_height="50dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Add a reward"
+                android:text="add reward"
                 tools:layout_editor_absoluteX="130dp"
                 tools:layout_editor_absoluteY="436dp" />
 
