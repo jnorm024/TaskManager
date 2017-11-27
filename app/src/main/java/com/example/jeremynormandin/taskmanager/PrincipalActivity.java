@@ -33,6 +33,7 @@ public class PrincipalActivity extends AppCompatActivity {
      */
     private static User loginUser;
     static List<Task> tasks;
+    static Task selectedTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         taskList.setAdapter(adapter);
                         taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                             public void onItemClick(AdapterView<?> list, View v, int pos, long id){
+                                //TODO faire en sorte que la tâche sélectionnée devienne la valeur static selectedTask
                                 startActivity(new Intent(PrincipalActivity.this, TaskDetails.class));
                             }
 

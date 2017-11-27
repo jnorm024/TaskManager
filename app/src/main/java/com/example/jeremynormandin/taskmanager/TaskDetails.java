@@ -15,18 +15,20 @@ public class TaskDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //TODO ajouter les détails de la tâche dans les zones de texte correspondantes
         setContentView(R.layout.activity_task_details);
         getSupportActionBar().setTitle("Task details");
 
 
 
         Button setCompleted = (Button) findViewById(R.id.setAsCompleted);
+        //TODO tester si la tâche est assignée à ce user(sinon popup) et si cest le cas set la task a isAccomplished = true
         setCompleted.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 /* Prend la tâche et la set à complétée */
             }
         });
-
+        //TODO tester so le user est parent avant de delete et retirer la tâche de la database si cest le cas
         Button delete = (Button) findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
