@@ -37,6 +37,7 @@ import java.util.List;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
+
 /**
  * A login screen that offers login via email/password.
  */
@@ -123,7 +124,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String password = mPasswordView.getText().toString().trim();
                 if(isValid(email, password)) {
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                }else{
+                    Snackbar.make(findViewById(R.id.iD1), "Wrong user and/or password.",
+                            Snackbar.LENGTH_SHORT)
+                            .show();
                 }
+
             }
         });
 
@@ -137,17 +143,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button toMain = (Button) findViewById(R.id.toMainContent);
-        toMain.setOnClickListener(new View.OnClickListener(){
-            public void onClick (View v){
-                /* à rechanger pour MainActivity.class quand la base de données fonctionne
-
-                */
-                startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
-
-
-            }
-        });
     }
 
     private void populateAutoComplete() {
@@ -254,10 +249,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * @return
      */
     private boolean isValid(String email, String password) {
-        //TODO: Replace this with your own logic
         boolean isValid;
         for(User user : users) {
-            if(user.getName().length()==email.length() || user.getPassword().length()==password.length()){
+            if (user.getName().length() == email.length() && user.getPassword().length() == password.length()) {
                 isValid = true;
                 for (int i = 0; i < email.length(); i++) {
                     if (email.charAt(i) != user.getName().charAt(i)) isValid = false;
@@ -265,13 +259,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 for (int i = 0; i < password.length(); i++) {
                     if (password.charAt(i) != user.getPassword().charAt(i)) isValid = false;
                 }
-
                 if(isValid == true) {
                     PrincipalActivity.setLoginUser(user);
                     return true;
-                }
-            }
+            }}
         }
+
         return false;
     }
 
