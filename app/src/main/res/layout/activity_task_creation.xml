@@ -48,15 +48,15 @@
             android:id="@+id/assignedToText"
             android:layout_width="99dp"
             android:layout_height="47dp"
+            android:layout_above="@+id/dayText"
+            android:layout_alignLeft="@+id/dueDateID"
+            android:layout_alignStart="@+id/dueDateID"
+            android:layout_marginBottom="20dp"
             android:text="AssignedTo"
             android:textAlignment="center"
             android:textSize="18sp"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="185dp"
-            android:layout_marginTop="37dp"
-            android:layout_below="@+id/taskDescription"
-            android:layout_alignLeft="@+id/taskDescription"
-            android:layout_alignStart="@+id/taskDescription" />
+            tools:layout_editor_absoluteY="185dp" />
 
         <Spinner
 

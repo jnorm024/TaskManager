@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -33,6 +34,14 @@ public class viewReward extends AppCompatActivity {
                 startActivity(new Intent(viewReward.this, giveRewards.class));
             }
 
+        });
+
+        Button refresh = (Button) findViewById(R.id.refreshButton);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //TODO refresh la liste de tâches
+
+            }
         });
     }
 }

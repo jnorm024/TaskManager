@@ -7,19 +7,22 @@
     tools:context="com.example.jeremynormandin.taskmanager.giveRewards">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout3"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="14dp">
+        android:layout_below="@+id/dueDate"
+        android:layout_marginTop="36dp">
 
         <Button
             android:id="@+id/setAsCompleted"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/delete"
+            android:layout_alignLeft="@+id/delete"
+            android:layout_alignStart="@+id/delete"
+            android:layout_marginBottom="35dp"
             android:background="@drawable/round_button"
             android:text="Task Completed"
             android:textSize="14sp" />
@@ -30,7 +33,7 @@
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="59dp"
+            android:layout_marginBottom="33dp"
             android:background="@drawable/round_button"
             android:text="Delete Task" />
     </RelativeLayout>
@@ -56,6 +59,73 @@
         android:layout_marginTop="36dp"
         android:text="Task Name"
         android:textAlignment="center"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/assignedTo"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/taskDetails"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="17dp"
+        android:text="Assigned TO"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dueDate"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/assignedTo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="Due Date"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/taskName"
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp"
+        android:text="Name :"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/detailsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/taskDetails"
+        android:layout_alignBottom="@+id/taskDetails"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView"
+        android:text="Details :"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/assigneToView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/detailsView"
+        android:layout_alignStart="@+id/detailsView"
+        android:layout_alignTop="@+id/assignedTo"
+        android:text="Assigned to :"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/dueDateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/assigneToView"
+        android:layout_alignStart="@+id/assigneToView"
+        android:layout_alignTop="@+id/dueDate"
+        android:text="Due Date :"
+        android:textColor="@color/colorAccent"
         android:textSize="18sp" />
 
 </RelativeLayout>

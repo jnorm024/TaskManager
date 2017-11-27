@@ -12,6 +12,14 @@ import android.widget.EditText;
 
 public class TaskDetails extends AppCompatActivity {
 
+
+    /* Les textView finissant en View ne sont pas à changer, ils servent seulement à permettre à l'usager de savoir ce que chaque info est.
+
+
+
+    
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
