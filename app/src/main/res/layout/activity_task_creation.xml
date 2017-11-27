@@ -149,45 +149,48 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/descriptionLayout">
+
+        <CheckBox
+            android:id="@+id/repetitiveTask"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp"
+            android:text="Repetitive Task"
+            tools:layout_editor_absoluteX="199dp"
+            tools:layout_editor_absoluteY="370dp" />
+
+        <Button
+            android:id="@+id/createTaskButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/round_button"
+            android:text="CREATE" />
 
-            <CheckBox
-                android:id="@+id/repetitiveTask"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="14dp"
-                android:text="Repetitive Task"
-                tools:layout_editor_absoluteX="199dp"
-                tools:layout_editor_absoluteY="370dp" />
-
-            <Button
-                android:id="@+id/createTaskButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
-                android:text="CREATE" />
-
-            <Button
-                android:id="@+id/addRewardButton"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="add reward"
-                tools:layout_editor_absoluteX="130dp"
-                tools:layout_editor_absoluteY="436dp" />
-
-        </RelativeLayout>
+        <Button
+            android:id="@+id/addRewardButton"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/repetitiveTask"
+            android:layout_alignStart="@+id/repetitiveTask"
+            android:layout_centerVertical="true"
+            android:background="@drawable/round_button"
+            android:text="add reward"
+            tools:layout_editor_absoluteX="130dp"
+            tools:layout_editor_absoluteY="436dp" />
 
     </RelativeLayout>
 
