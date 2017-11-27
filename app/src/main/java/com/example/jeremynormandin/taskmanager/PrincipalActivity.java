@@ -43,6 +43,8 @@ public class PrincipalActivity extends AppCompatActivity {
         tasks = new ArrayList<>();
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
+        final ArrayList<String> list= new ArrayList<String>();
+        final ListView taskList= (ListView) findViewById(R.id.taskList);
         //TODO Ma liste static des tâches ne semble pas se remplir bien qu'on itère à travers tous les tâches. À arranger!!!
         tasksRef.addListenerForSingleValueEvent(
                 new ValueEventListener() {
@@ -57,7 +59,17 @@ public class PrincipalActivity extends AppCompatActivity {
                             System.out.println(task.getName());
                             //adding task to the list
                             tasks.add(task);
+                            list.add(task.getName());
                         }
+                        System.out.println("AA");
+                        ArrayAdapter adapter = new ArrayAdapter(PrincipalActivity.this, android.R.layout.simple_list_item_1, list);
+                        taskList.setAdapter(adapter);
+                        taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                            public void onItemClick(AdapterView<?> list, View v, int pos, long id){
+                                startActivity(new Intent(PrincipalActivity.this, TaskDetails.class));
+                            }
+
+                        });
                     }
 
                     @Override
@@ -67,37 +79,15 @@ public class PrincipalActivity extends AppCompatActivity {
                 });
         nameView = (TextView) findViewById(R.id.nameView);
         nameView.setText(loginUser.getName());
-        //TODO faire en sorte que la liste de tâche affiche notre tasks list
-        ListView taskList= (ListView) findViewById(R.id.taskList);
-        String[] values= new String []{
-                "Empty"
-        };
-        ArrayList<String> list= new ArrayList<String>();
-        for(String value : values) {
-            list.add(value);
-        }
-        for(Task task : tasks) {
-            System.out.println(task.getName());
-            list.add(task.getName());
-        }
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-        taskList.setAdapter(adapter);
-        taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> list, View v, int pos, long id){
-                startActivity(new Intent(PrincipalActivity.this, TaskDetails.class));
-            }
-
-        });
-
-
+        System.out.println("f");
         Button newTask = (Button) findViewById(R.id.addNewTask);
         newTask.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 startActivity(new Intent(PrincipalActivity.this, TaskCreation.class));
             }
         });
-
+        System.out.println("g");
         Button toRewards= (Button) findViewById(R.id.toRewards);
         toRewards.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -105,7 +95,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
             }
         });
-
+        System.out.println("h");
     }
 
     public static void setLoginUser(User user) {
