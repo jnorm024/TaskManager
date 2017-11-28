@@ -40,7 +40,7 @@ public class viewReward extends AppCompatActivity {
         refresh.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //TODO refresh la liste de tâches
-
+                //même méthode que dans principalActivity??
             }
         });
     }
