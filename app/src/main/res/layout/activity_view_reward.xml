@@ -18,10 +18,16 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_toLeftOf="@+id/spinner"
+            android:layout_toStartOf="@+id/spinner"
+            android:gravity="center"
             android:text="View rewards for:"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:textColorLink="@color/colorAccent"
             android:textSize="18sp" />
 
         <Spinner
@@ -44,7 +50,7 @@
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/taskList"
+        android:id="@+id/rewardList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
