@@ -1,15 +1,11 @@
 package com.example.jeremynormandin.taskmanager;
 
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.support.design.widget.Snackbar;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import static com.example.jeremynormandin.taskmanager.R.layout.activity_task_details;
@@ -27,10 +23,7 @@ public class TaskDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //TODO ajouter les détails de la tâche dans les zones de texte correspondantes
-        Intent myIntent = getIntent();
-        System.out.println(myIntent);
-        Task selectedTask = (Task) myIntent.getSerializableExtra("task");
+        Task selectedTask = (Task) getIntent().getSerializableExtra("task");
         setContentView(activity_task_details);
 
         TextView taskName = (TextView) findViewById(R.id.taskName);
@@ -40,7 +33,15 @@ public class TaskDetails extends AppCompatActivity {
         taskDetails.setText(selectedTask.getDetails());
 
         TextView assignedTo = (TextView) findViewById(R.id.assignedTo);
-        assignedTo.setText(selectedTask.getAssignedUserId());
+        if(selectedTask.getAssignedUserId()==null) {
+            assignedTo.setText("Bonus");
+        } else {
+            for(User user : LoginActivity.users) {
+                if(selectedTask.getAssignedUserId().equals(user.getUserId())) {
+                    assignedTo.setText(user.getName());
+                }
+            }
+        }
 
         TextView dueDate = (TextView) findViewById(R.id.dueDate);
         dueDate.setText(selectedTask.getDueDate());

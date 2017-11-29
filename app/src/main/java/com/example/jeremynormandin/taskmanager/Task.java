@@ -1,10 +1,12 @@
 package com.example.jeremynormandin.taskmanager;
 
+import java.io.Serializable;
+
 /**
  * Created by amand on 2017-11-24.
  */
 
-public class Task {
+public class Task implements Serializable {
     private String taskId;
     private String name;
     private String details;

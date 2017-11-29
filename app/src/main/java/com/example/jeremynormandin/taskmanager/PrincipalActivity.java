@@ -2,7 +2,6 @@ package com.example.jeremynormandin.taskmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,16 +66,14 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                         taskList.setAdapter(adapter);
                         taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                             public void onItemClick(AdapterView<?> taskList, View ListView, int pos, long id){
+                                String name = (String) taskList.getItemAtPosition(pos);
 
                                 for (int i = 0; i < list.size(); i++) {
-                                    System.out.println(taskList.getItemAtPosition(pos));
-                                    System.out.println(list.get(i));
-                                    if(taskList.getItemAtPosition(pos).equals(list.get(i))){
+                                    if(taskList.getItemAtPosition(pos).equals(tasks.get(i).getName())){
                                         //TODO trouver la variable qui va dans putExtra et régler startActivity
+                                        Task selectedTask = tasks.get(i);
                                         Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
-                                        myIntent.putExtra("task", PrincipalActivity.this);
-                                        System.out.println("AA");
-                                        System.out.println(myIntent);
+                                        myIntent.putExtra("task", selectedTask);
                                         startActivity(myIntent);
                                     }
                                 }
