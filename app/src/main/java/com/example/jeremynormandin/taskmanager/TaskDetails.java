@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import static com.example.jeremynormandin.taskmanager.R.layout.activity_task_details;
 
@@ -27,8 +28,23 @@ public class TaskDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //TODO ajouter les détails de la tâche dans les zones de texte correspondantes
-        System.out.println(savedInstanceState);
+        Intent myIntent = getIntent();
+        System.out.println(myIntent);
+        Task selectedTask = (Task) myIntent.getSerializableExtra("task");
         setContentView(activity_task_details);
+
+        TextView taskName = (TextView) findViewById(R.id.taskName);
+        taskName.setText(selectedTask.getName());
+
+        TextView taskDetails = (TextView) findViewById(R.id.taskDetails);
+        taskDetails.setText(selectedTask.getDetails());
+
+        TextView assignedTo = (TextView) findViewById(R.id.assignedTo);
+        assignedTo.setText(selectedTask.getAssignedUserId());
+
+        TextView dueDate = (TextView) findViewById(R.id.dueDate);
+        dueDate.setText(selectedTask.getDueDate());
+
         getSupportActionBar().setTitle("Task details");
 
 

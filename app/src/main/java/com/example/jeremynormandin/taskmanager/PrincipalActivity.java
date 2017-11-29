@@ -2,6 +2,7 @@ package com.example.jeremynormandin.taskmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,10 +17,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrincipalActivity extends AppCompatActivity {
+public class PrincipalActivity extends AppCompatActivity implements Serializable  {
 
     TextView nameView;
     /**
@@ -65,13 +67,21 @@ public class PrincipalActivity extends AppCompatActivity {
                         taskList.setAdapter(adapter);
                         taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                             public void onItemClick(AdapterView<?> taskList, View ListView, int pos, long id){
-                                //TODO faire en sorte que la tâche sélectionnée devienne la valeur static selectedTask
-                                //(je comprend pas la photo que t'as envoyé so je sais pas comment régler les problèmes avec les static)
-                                //comme le if dans TaskDetails
-                               startActivity(new Intent(PrincipalActivity.this, TaskDetails.class));
-                               /** Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
-                                myIntent.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
-                                startActivity(myIntent);*/
+
+                                for (int i = 0; i < list.size(); i++) {
+                                    System.out.println(taskList.getItemAtPosition(pos));
+                                    System.out.println(list.get(i));
+                                    if(taskList.getItemAtPosition(pos).equals(list.get(i))){
+                                        //TODO trouver la variable qui va dans putExtra et régler startActivity
+                                        Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
+                                        myIntent.putExtra("task", PrincipalActivity.this);
+                                        System.out.println("AA");
+                                        System.out.println(myIntent);
+                                        startActivity(myIntent);
+                                    }
+                                }
+                                //Task task = new Task(selectedTask.getTaskId(), selectedTask.getName(), selectedTask.getDetails(), selectedTask.getDueDate(), selectedTask.getIsRepeated());
+
 
                             }
 
