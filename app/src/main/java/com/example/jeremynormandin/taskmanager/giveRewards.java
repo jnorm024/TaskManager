@@ -66,4 +66,10 @@ public class giveRewards extends AppCompatActivity {
         });
 
     }
+
+    /* Method taken from https://stackoverflow.com/questions/6514657/prevent-back-button-from-closing-my-application
+    */
+    public void onBackPressed() {
+        // do nothing. We want to force user to stay in this activity and not drop out.
+    }
 }

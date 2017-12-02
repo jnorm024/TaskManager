@@ -48,6 +48,12 @@ public class createReward extends AppCompatActivity {
 
     }
 
+    /* Method taken from https://stackoverflow.com/questions/6514657/prevent-back-button-from-closing-my-application
+    */
+    public void onBackPressed() {
+        // do nothing. We want to force user to stay in this activity and not drop out.
+    }
+
     private void addReward() {
         String rewardName = nameText.getText().toString().trim();
         String rewardDescription = descriptionText.getText().toString();
@@ -78,4 +84,6 @@ public class createReward extends AppCompatActivity {
             Toast.makeText(this, "Please enter a valid name", Toast.LENGTH_LONG).show();
         }
     }
+
+
 }
