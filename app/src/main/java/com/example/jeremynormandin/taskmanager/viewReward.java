@@ -106,6 +106,13 @@ public class viewReward extends AppCompatActivity {
             }
         });
 
+        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(viewReward.this, PrincipalActivity.class));
+            }
+        });
 
 
 

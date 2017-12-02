@@ -73,6 +73,14 @@ public class TaskCreation extends AppCompatActivity {
             }
         });
 
+        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TaskCreation.this, PrincipalActivity.class));
+            }
+        });
+
         assignToUser();
         addDay();
         addMonth();

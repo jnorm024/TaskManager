@@ -30,7 +30,8 @@
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".giveRewards" />
-        <activity android:name=".TaskDetails"></activity>
+        <activity android:name=".TaskDetails" />
+        <activity android:name=".Settings"></activity>
     </application>
 
 </manifest>

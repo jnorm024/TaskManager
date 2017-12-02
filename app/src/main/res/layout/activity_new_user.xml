@@ -24,14 +24,25 @@
 
             <Button
                 android:id="@+id/signIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="29dp"
+                android:background="@drawable/round_button"
                 android:text="Register"
                 tools:layout_editor_absoluteX="148dp"
                 tools:layout_editor_absoluteY="191dp" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/signIn"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="34dp"
+                android:background="@drawable/round_button"
+                android:text="Cancel" />
 
         </RelativeLayout>
 

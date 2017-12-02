@@ -112,6 +112,14 @@ public class TaskDetails extends AppCompatActivity {
                     finish();
                 }
         }});
+        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
+            }
+        });
+
     }
     /* Method taken from https://stackoverflow.com/questions/6514657/prevent-back-button-from-closing-my-application
     */

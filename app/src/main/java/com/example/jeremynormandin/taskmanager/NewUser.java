@@ -72,6 +72,13 @@ public class NewUser extends AppCompatActivity {
                         //handle databaseError
                     }
                 });
+        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(NewUser.this, LoginActivity.class));
+            }
+        });
     }
 
     private void addUser() {
@@ -108,6 +115,7 @@ public class NewUser extends AppCompatActivity {
             Toast.makeText(this, "Please enter a valid name and password", Toast.LENGTH_LONG).show();
         }
     }
+
 
     /* Method taken from https://stackoverflow.com/questions/6514657/prevent-back-button-from-closing-my-application
     */

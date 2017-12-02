@@ -16,6 +16,7 @@ public class giveRewards extends AppCompatActivity {
     TextView rewardName;
     TextView rewardDesc;
     Button giveButton;
+    Button cancelButton;
 
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference rewardsRef;
@@ -58,6 +59,17 @@ public class giveRewards extends AppCompatActivity {
                     }
                 }
                 Toast.makeText(giveRewards.this, "Don't forget to give the reward in real life!", Toast.LENGTH_LONG).show();
+                Intent myIntent = new Intent(giveRewards.this, viewReward.class);
+                myIntent.putExtra("user",0);
+                startActivity(myIntent);
+                finish();
+            }
+        });
+
+        cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent myIntent = new Intent(giveRewards.this, viewReward.class);
                 myIntent.putExtra("user",0);
                 startActivity(myIntent);

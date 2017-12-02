@@ -22,6 +22,8 @@ public class createReward extends AppCompatActivity {
     EditText descriptionText;
     Button buttonAddReward;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,14 @@ public class createReward extends AppCompatActivity {
                 addReward();
                 startActivity(new Intent(createReward.this, PrincipalActivity.class));
                 finish();
+            }
+        });
+
+        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(createReward.this, TaskCreation.class));
             }
         });
 

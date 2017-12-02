@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jeremynormandin.taskmanager.Settings">
+
+    <Button
+        android:id="@+id/deleteUser"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/switchUser"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:background="@drawable/round_button"
+        android:text="Delete USER" />
+
+    <Button
+        android:id="@+id/switchUser"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="84dp"
+        android:background="@drawable/round_button"
+        android:text="Swtich User" />
+
+    <Button
+        android:id="@+id/home"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:background="@drawable/round_button"
+        android:text="Home" />
+</RelativeLayout>

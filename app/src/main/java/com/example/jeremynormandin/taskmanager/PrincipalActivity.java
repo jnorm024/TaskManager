@@ -123,6 +123,15 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             }
         });
 
+        Button settings = (Button) findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                startActivity(new Intent(PrincipalActivity.this, Settings.class));
+                finish();
+            }
+        });
+
+
     }
 
     /* Method taken from https://stackoverflow.com/questions/6514657/prevent-back-button-from-closing-my-application

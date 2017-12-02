@@ -21,7 +21,7 @@
             android:id="@+id/monthSpinner"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
+            android:layout_alignTop="@+id/daySpinner"
             android:layout_centerHorizontal="true" />
 
         <Spinner
@@ -29,18 +29,19 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="23dp"
-            android:layout_marginStart="23dp" />
+            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/taskDescription"
+            android:layout_toStartOf="@+id/taskDescription" />
 
         <Spinner
             android:id="@+id/yearSpinner"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/monthSpinner"
             android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp" />
 
@@ -48,10 +49,10 @@
             android:id="@+id/assignedToText"
             android:layout_width="99dp"
             android:layout_height="47dp"
-            android:layout_above="@+id/dayText"
             android:layout_alignLeft="@+id/dueDateID"
             android:layout_alignStart="@+id/dueDateID"
-            android:layout_marginBottom="20dp"
+            android:layout_below="@+id/taskDescription"
+            android:layout_marginTop="27dp"
             android:text="AssignedTo"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -71,11 +72,12 @@
             android:id="@+id/yearText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Year :"
-            android:textSize="16sp"
-            android:layout_above="@+id/yearSpinner"
+            android:layout_alignBaseline="@+id/monthText"
+            android:layout_alignBottom="@+id/monthText"
             android:layout_alignLeft="@+id/yearSpinner"
-            android:layout_alignStart="@+id/yearSpinner" />
+            android:layout_alignStart="@+id/yearSpinner"
+            android:text="Year :"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/dayText"
@@ -91,7 +93,7 @@
             android:id="@+id/monthText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/monthSpinner"
+            android:layout_above="@+id/daySpinner"
             android:layout_alignLeft="@+id/monthSpinner"
             android:layout_alignStart="@+id/monthSpinner"
             android:text="Month : "
@@ -117,7 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="43dp"
+            android:layout_marginTop="21dp"
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
@@ -163,9 +165,9 @@
             android:id="@+id/repetitiveTask"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_alignLeft="@+id/createTaskButton"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="14dp"
+            android:layout_alignStart="@+id/createTaskButton"
             android:text="Repetitive Task"
             tools:layout_editor_absoluteX="199dp"
             tools:layout_editor_absoluteY="370dp" />
@@ -174,9 +176,8 @@
             android:id="@+id/createTaskButton"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/addRewardButton"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
             android:background="@drawable/round_button"
             android:text="CREATE" />
 
@@ -186,11 +187,23 @@
             android:layout_height="50dp"
             android:layout_alignLeft="@+id/repetitiveTask"
             android:layout_alignStart="@+id/repetitiveTask"
-            android:layout_centerVertical="true"
+            android:layout_below="@+id/repetitiveTask"
             android:background="@drawable/round_button"
             android:text="add reward"
             tools:layout_editor_absoluteX="130dp"
             tools:layout_editor_absoluteY="436dp" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/createTaskButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/round_button"
+            android:text="Cancel" />
 
     </RelativeLayout>
 
