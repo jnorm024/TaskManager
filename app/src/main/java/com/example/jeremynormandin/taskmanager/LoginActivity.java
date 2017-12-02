@@ -125,6 +125,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 String password = mPasswordView.getText().toString().trim();
                 if(isValid(email, password)) {
                     startActivity(new Intent(LoginActivity.this, PrincipalActivity.class));
+                    finish();
                 }else{
                     Snackbar.make(findViewById(R.id.iD1), "Wrong user and/or password.",
                             Snackbar.LENGTH_SHORT)

@@ -41,6 +41,7 @@ public class createReward extends AppCompatActivity {
             public void onClick(View view) {
                 addReward();
                 startActivity(new Intent(createReward.this, PrincipalActivity.class));
+                finish();
             }
         });
 

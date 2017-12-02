@@ -44,6 +44,7 @@ public class NewUser extends AppCompatActivity {
             public void onClick(View view) {
                 addUser();
                 startActivity(new Intent(NewUser.this, LoginActivity.class));
+                finish();
             }
         });
 

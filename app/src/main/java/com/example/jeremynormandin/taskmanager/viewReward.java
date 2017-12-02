@@ -1,9 +1,8 @@
 package com.example.jeremynormandin.taskmanager;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,11 +17,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class viewReward extends AppCompatActivity {
 
     Spinner viewRewardFor;
+    Button refresh;
+
+    private DatabaseReference databaseTasksManagement;
+    private DatabaseReference rewardsRef;
+
+    static HashMap<String, Reward> rewards;
 
 
     @Override
@@ -31,23 +37,73 @@ public class viewReward extends AppCompatActivity {
         setContentView(R.layout.activity_view_reward);
         getSupportActionBar().setTitle("Rewards List");
 
+        final Integer spinnerUser = (Integer) getIntent().getSerializableExtra("user");
+
         viewRewardFor();
+        viewRewardFor.setSelection(spinnerUser);
 
-        ListView rewardList= (ListView) findViewById(R.id.rewardList);
-        String[] values= new String []{
-                "Empty","Empty2"
-        };
+        final ListView rewardList= (ListView) findViewById(R.id.rewardList);
         final ArrayList<String> list= new ArrayList<String>();
-        for (int i=0; i<values.length; ++i){
-            list.add(values[i]);
-        }
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-        rewardList.setAdapter(adapter);
-        rewardList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            public void onItemClick(AdapterView<?> list, View v, int pos, long id){
-                startActivity(new Intent(viewReward.this, giveRewards.class));
-            }
+        rewards = new HashMap<>();
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        rewardsRef = databaseTasksManagement.child("rewards");
+        rewardsRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //clear previous user list
+                        rewards.clear();
+                        //access to all user in database
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //getting user
+                            Reward reward =  postSnapshot.getValue(Reward.class);
+                            //adding user to the list
+                            rewards.put(reward.getRewardId(), reward);
+                        }
 
+                        User selectedUser = getSelectedUser();
+                        final ArrayList<Reward> userRewards = getRewardsList(selectedUser);
+
+                        for (Reward reward : userRewards){
+                            list.add(reward.getName());
+                        }
+                        ArrayAdapter adapter = new ArrayAdapter(viewReward.this, android.R.layout.simple_list_item_1, list);
+                        rewardList.setAdapter(adapter);
+                        rewardList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+                            public void onItemClick(AdapterView<?> list, View v, int pos, long id){
+                                for(Reward reward : userRewards) {
+                                    if(rewardList.getItemAtPosition(pos).equals(reward.getName())) {
+                                        Intent myIntent = new Intent(viewReward.this, giveRewards.class);
+                                        myIntent.putExtra("reward",reward);
+                                        startActivity(myIntent);
+                                        finish();
+                                    }
+                                }
+
+                            }
+
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        //handle databaseError
+                    }
+                });
+
+
+
+
+        refresh = (Button) findViewById(R.id.refreshButton);
+        refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(viewReward.this, viewReward.class);
+                int spinnerIndex = viewRewardFor.getSelectedItemPosition();
+                myIntent.putExtra("user", spinnerIndex);
+                startActivity(myIntent);
+                finish();
+            }
         });
 
 
@@ -65,15 +121,35 @@ public class viewReward extends AppCompatActivity {
                 list.add(user.getName());
                 System.out.println(user.getName());
             }
-            for (String userName : list) {
-                System.out.println(userName);
-            }
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         viewRewardFor.setAdapter(dataAdapter);
+    }
+    private User getSelectedUser() {
+        for(User user : LoginActivity.users) {
+            if(user.getName().equals(viewRewardFor.getSelectedItem().toString())) {
+                return user;
+            }
+        }
+        System.err.println("Error : user not found");
+        return null;
+    }
+
+    private ArrayList<Reward> getRewardsList(User user) {
+        ArrayList<Task> userRewardedTasks = new ArrayList<>();
+        for(Task task : PrincipalActivity.tasks) {
+            if(user.getUserId().equals(task.getAssignedUserId()) && task.getAssociatedRewardId()!= null && task.getIsAccomplished()) {
+                userRewardedTasks.add(task);
+            }
+        }
+        ArrayList<Reward> userRewards = new ArrayList<>();
+        for(Task task : userRewardedTasks) {
+            userRewards.add(rewards.get(task.getAssociatedRewardId()));
+        }
+        return userRewards;
     }
 
 

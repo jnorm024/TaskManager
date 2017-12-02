@@ -13,7 +13,6 @@ public class Task implements Serializable {
     private boolean isAssigned = false;
     private String dueDate;
     private boolean isAccomplished = false;
-    private boolean rewardClaimed = false;
     private boolean isRepeated;
 
     private String assignedUserId;
@@ -45,9 +44,6 @@ public class Task implements Serializable {
     public boolean getIsAccomplished(){
         return this.isAccomplished;
     }
-    public boolean getRewardClaimed(){
-        return this.rewardClaimed;
-    }
     public boolean getIsRepeated(){
         return this.isRepeated;
     }
@@ -64,7 +60,6 @@ public class Task implements Serializable {
     public void setAccomplished() {
         isAccomplished = true;
     }
-    public void setRewardClaimed() {
-        rewardClaimed = true;
+    public void reset() { isAccomplished = false; }
+
     }
-}

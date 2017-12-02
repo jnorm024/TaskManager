@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,6 +44,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         getSupportActionBar().setTitle("Home Page");
 
         tasks = new ArrayList<>();
+        final ArrayList<Task> listedTask = new ArrayList<>();
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
         final ArrayList<String> list= new ArrayList<String>();
@@ -60,7 +62,11 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                             System.out.println(task.getName());
                             //adding task to the list
                             tasks.add(task);
-                            list.add(task.getName());
+
+                            if(!task.getIsAccomplished()) {
+                                listedTask.add(task);
+                                list.add(task.getName());
+                            }
                         }
                         ArrayAdapter adapter = new ArrayAdapter(PrincipalActivity.this, android.R.layout.simple_list_item_1, list);
                         taskList.setAdapter(adapter);
@@ -69,12 +75,12 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                 String name = (String) taskList.getItemAtPosition(pos);
 
                                 for (int i = 0; i < list.size(); i++) {
-                                    if(taskList.getItemAtPosition(pos).equals(tasks.get(i).getName())){
-                                        //TODO trouver la variable qui va dans putExtra et régler startActivity
-                                        Task selectedTask = tasks.get(i);
+                                    if(taskList.getItemAtPosition(pos).equals(listedTask.get(i).getName())){
+                                        Task selectedTask = listedTask.get(i);
                                         Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
                                         myIntent.putExtra("task", selectedTask);
                                         startActivity(myIntent);
+                                        finish();
                                     }
                                 }
                                 //Task task = new Task(selectedTask.getTaskId(), selectedTask.getName(), selectedTask.getDetails(), selectedTask.getDueDate(), selectedTask.getIsRepeated());
@@ -97,6 +103,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         newTask.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 startActivity(new Intent(PrincipalActivity.this, TaskCreation.class));
+                finish();
             }
         });
 
@@ -104,7 +111,14 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         Button toRewards= (Button) findViewById(R.id.toRewards);
         toRewards.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(PrincipalActivity.this, viewReward.class));
+                if(loginUser.getIsParent()) {
+                    Intent myIntent = new Intent(PrincipalActivity.this, viewReward.class);
+                    myIntent.putExtra("user", 0);
+                    startActivity(myIntent);
+                    finish();
+                } else {
+                    Toast.makeText(PrincipalActivity.this, "Only parents have access to this", Toast.LENGTH_LONG).show();
+                }
 
             }
         });

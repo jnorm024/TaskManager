@@ -1,30 +1,35 @@
 package com.example.jeremynormandin.taskmanager;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import static com.example.jeremynormandin.taskmanager.R.layout.activity_task_details;
 
 public class TaskDetails extends AppCompatActivity {
 
-
-    /* Les textView finissant en View ne sont pas à changer, ils servent seulement à permettre à l'usager de savoir ce que chaque info est.
-
-
-
-
-     */
+    private DatabaseReference databaseTasksManagement;
+    private DatabaseReference tasksRef;
+    private DatabaseReference rewardsRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Task selectedTask = (Task) getIntent().getSerializableExtra("task");
+        final Task selectedTask = (Task) getIntent().getSerializableExtra("task");
         setContentView(activity_task_details);
+
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        tasksRef = databaseTasksManagement.child("tasks");
+        rewardsRef = databaseTasksManagement.child("rewards");
 
         TextView taskName = (TextView) findViewById(R.id.taskName);
         taskName.setText(selectedTask.getName());
@@ -33,28 +38,31 @@ public class TaskDetails extends AppCompatActivity {
         taskDetails.setText(selectedTask.getDetails());
 
         TextView assignedTo = (TextView) findViewById(R.id.assignedTo);
-        if(selectedTask.getAssignedUserId()==null) {
-            assignedTo.setText("Bonus");
+        System.out.println(selectedTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println(selectedTask.getIsAssigned());
+        if(!selectedTask.getIsAssigned()) {
+             assignedTo.setText("Bonus");
         } else {
             for(User user : LoginActivity.users) {
+                System.out.println(selectedTask.getAssignedUserId()+" vs "+user.getUserId());
                 if(selectedTask.getAssignedUserId().equals(user.getUserId())) {
+                    System.out.println(user.getName()+" user name found !!!!!!!!!!!!!!!!!!");
                     assignedTo.setText(user.getName());
                 }
             }
         }
 
         TextView dueDate = (TextView) findViewById(R.id.dueDate);
-        dueDate.setText(selectedTask.getDueDate());
-
+        if(!selectedTask.getIsRepeated()) dueDate.setText(selectedTask.getDueDate());
+        else dueDate.setText("repetitive");
         getSupportActionBar().setTitle("Task details");
 
 
         Button setCompleted = (Button) findViewById(R.id.setAsCompleted);
-        //TODO tester si la tâche est assignée à ce user(sinon popup) et si cest le cas set la task a isAccomplished = true
         setCompleted.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 /* Prend la tâche et la set à complétée */
-                //if(PrincipalActivity.getLoginUser().getUserId() != Task.R.getAssignedUserId();){
+                if(!PrincipalActivity.getLoginUser().getUserId().equals(selectedTask.getAssignedUserId()) && selectedTask.getIsAssigned()){
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(TaskDetails.this);
                     builder.setTitle("Can't proceed");
@@ -66,12 +74,16 @@ public class TaskDetails extends AppCompatActivity {
                         }
                     });
                     builder.show();
-              //  }else{
-                //    Task.setAccomplished();
-              //  }
+                }   else{
+                    selectedTask.setAccomplished();
+                    selectedTask.setAssignedUserId(PrincipalActivity.getLoginUser().getUserId());
+                    tasksRef.child(selectedTask.getTaskId()).setValue(selectedTask);
+                    Toast.makeText(TaskDetails.this,"This task is set as accomplished",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
+                    finish();
+                }
             }
         });
-        //TODO deleter la tache
         Button delete = (Button) findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
@@ -91,7 +103,13 @@ public class TaskDetails extends AppCompatActivity {
                     });
                     builder.show();
                 }else{
-                    //delete task
+                    tasksRef.child(selectedTask.getTaskId()).removeValue();
+                    if(selectedTask.getAssociatedRewardId()!=null) {
+                        rewardsRef.child(selectedTask.getAssociatedRewardId()).removeValue();
+                    }
+                    Toast.makeText(TaskDetails.this,"This task is removed",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
+                    finish();
                 }
         }});
     }

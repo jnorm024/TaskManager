@@ -59,6 +59,7 @@ public class TaskCreation extends AppCompatActivity {
             public void onClick(View v) {
                 addTask();
                 startActivity(new Intent(TaskCreation.this, createReward.class));
+                finish();
 
             }
         });
@@ -67,6 +68,7 @@ public class TaskCreation extends AppCompatActivity {
             public void onClick(View v) {
                 addTask();
                 startActivity(new Intent(TaskCreation.this, PrincipalActivity.class));
+                finish();
 
             }
         });
@@ -200,6 +202,7 @@ public class TaskCreation extends AppCompatActivity {
         String description = taskDescription.getText().toString();
         boolean repeat = repetitive.isChecked();
         String date = yearSpinner.getSelectedItem().toString()+monthSpinner.getSelectedItem().toString()+daySpinner.getSelectedItem().toString();
+        String userName = assignedTo.getSelectedItem().toString();
 
         //checking if the value is provided
         if (!TextUtils.isEmpty(name)) {
@@ -215,20 +218,16 @@ public class TaskCreation extends AppCompatActivity {
             Task newTask =  new Task(id, name, description, date, repeat);
             /**
              * Si le user est un parent je compare le choix qu'il a fait dans la liste déroulante,
-             * Si ce choix correspond à un usager et non bonus, alors j'assigne le id de l'usager reliè
+             * Si ce choix correspond à un usager et non bonus, alors j'assigne le id de l'usager relié
              * à la tâche
              */
             if(PrincipalActivity.getLoginUser().getIsParent()) {
-                boolean found = true;
                 for(User user : LoginActivity.users) {
-                    if(user.getName().length()==name.length()){
-                        for (int i = 0; i < name.length(); i++) {
-                            if (name.charAt(i) != user.getName().charAt(i)) found = false;
-                        }
-                        if(found == true) {
+                    if(user.getName().equals(userName)){
                             newTask.setAssignedUserId(user.getUserId());
+                            System.out.println(user.getName());
+                            System.out.println(newTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!");
                             break;
-                        }
                     }
                 }
             }
