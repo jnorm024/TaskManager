@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jeremynormandin.taskmanager.New_Ressource">
+
+    <TextView
+        android:id="@+id/nameView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="91dp"
+        android:layout_toLeftOf="@+id/cancelButton"
+        android:layout_toStartOf="@+id/cancelButton"
+        android:text="Name :"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/nameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/nameView"
+        android:layout_alignBottom="@+id/nameView"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_toEndOf="@+id/nameView"
+        android:layout_toRightOf="@+id/nameView"
+        android:ems="10"
+        android:hint="Name "
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/groups"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/nameText"
+        android:layout_alignRight="@+id/nameText"
+        android:layout_below="@+id/nameText"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:id="@+id/groupsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/groups"
+        android:layout_alignLeft="@+id/nameView"
+        android:layout_alignStart="@+id/nameView"
+        android:layout_marginBottom="13dp"
+        android:text="Add a group :"
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/createButton"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/groups"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/round_button"
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/round_button"
+        android:text="Cancel" />
+</RelativeLayout>

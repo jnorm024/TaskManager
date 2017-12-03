@@ -135,6 +135,22 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             }
         });
 
+        Button ressources = (Button) findViewById(R.id.Ressources);
+        ressources.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                startActivity(new Intent(PrincipalActivity.this, View_Ressources.class));
+                finish();
+            }
+        });
+
+        Button groups = (Button) findViewById(R.id.groups);
+        groups.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                startActivity(new Intent(PrincipalActivity.this, View_Groups.class));
+                finish();
+            }
+        });
+
 
     }
 
