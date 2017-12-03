@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -43,7 +42,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        getSupportActionBar().setTitle("Home Page");
+        getSupportActionBar().setTitle("Home-"+loginUser.getName());
         setTaskViewSpinner();
         setGroupViewSpinner();
 
@@ -143,13 +142,13 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             }
         });
 
-        /*Button groups = (Button) findViewById(R.id.groups);
-        groups.setOnClickListener(new View.OnClickListener(){
+        Button viewScores = (Button) findViewById(R.id.viewScores);
+        viewScores.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
-                startActivity(new Intent(PrincipalActivity.this, View_Groups.class));
+                startActivity(new Intent(PrincipalActivity.this, ViewScore.class));
                 finish();
             }
-        });*/
+        });
 
 
     }

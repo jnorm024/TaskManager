@@ -34,6 +34,7 @@
         <activity android:name=".Settings" />
         <activity android:name=".View_Ressources" />
         <activity android:name=".New_Ressource" />
+        <activity android:name=".ViewScore"></activity>
     </application>
 
 </manifest>
