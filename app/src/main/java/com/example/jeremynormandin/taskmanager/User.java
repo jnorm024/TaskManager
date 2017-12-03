@@ -9,6 +9,7 @@ public class User {
     private String name;
     private String password;
     private boolean isParent;
+    private int points = 0;
 
     public User() {}
 
@@ -19,6 +20,10 @@ public class User {
         this.isParent = isParent;
     }
 
+    public void addPoints(int newPoints){
+        points += newPoints;
+    }
+
     public String getUserId() {return this.userId;}
     public String getName(){
         return this.name;
@@ -27,4 +32,5 @@ public class User {
         return this.password;
     }
     public boolean getIsParent() {return isParent;}
+    public int getPoints() {return points;}
 }

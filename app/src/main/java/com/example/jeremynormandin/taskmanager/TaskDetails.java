@@ -20,6 +20,7 @@ public class TaskDetails extends AppCompatActivity {
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference tasksRef;
     private DatabaseReference rewardsRef;
+    private DatabaseReference usersRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class TaskDetails extends AppCompatActivity {
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
         rewardsRef = databaseTasksManagement.child("rewards");
+        usersRef = databaseTasksManagement.child("users");
 
         TextView taskName = (TextView) findViewById(R.id.taskName);
         taskName.setText(selectedTask.getName());
@@ -77,6 +79,8 @@ public class TaskDetails extends AppCompatActivity {
                 }   else{
                     selectedTask.setAccomplished();
                     selectedTask.setAssignedUserId(PrincipalActivity.getLoginUser().getUserId());
+                    PrincipalActivity.getLoginUser().addPoints(selectedTask.getPoints());
+                    usersRef.child(PrincipalActivity.getLoginUser().getUserId()).setValue(PrincipalActivity.getLoginUser());
                     tasksRef.child(selectedTask.getTaskId()).setValue(selectedTask);
                     Toast.makeText(TaskDetails.this,"This task is set as accomplished",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));

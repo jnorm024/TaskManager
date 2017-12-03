@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,8 @@ import java.util.List;
 public class PrincipalActivity extends AppCompatActivity implements Serializable  {
 
     TextView nameView;
+    Spinner taskView;
+    Spinner groupView;
     /**
      * ici je fais appelle à ma base de donnée pour les tâches
      */
@@ -35,13 +38,14 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
      */
     private static User loginUser;
     static List<Task> tasks;
-    static Task selectedTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         getSupportActionBar().setTitle("Home Page");
+        setTaskViewSpinner();
+        setGroupViewSpinner();
 
         tasks = new ArrayList<>();
         final ArrayList<Task> listedTask = new ArrayList<>();
@@ -146,6 +150,33 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
 
     public static User getLoginUser() {
         return loginUser;
+    }
+
+    private void setTaskViewSpinner() {
+        taskView = (Spinner) findViewById(R.id.taskView);
+        List<String> list = new ArrayList<String>();
+        list.add("all users");
+        for (User user : LoginActivity.users) {
+            list.add(user.getName());
+        }
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        taskView.setAdapter(dataAdapter);
+    }
+
+    private void setGroupViewSpinner() {
+        groupView = (Spinner) findViewById(R.id.groupView);
+        List<String> list = new ArrayList<String>();
+        list.add("all groups");
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        groupView.setAdapter(dataAdapter);
     }
 
 }

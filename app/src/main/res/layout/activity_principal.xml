@@ -9,19 +9,59 @@
 
 
     <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relativeLayout5">
+
+        <TextView
+            android:id="@+id/viewText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="26dp"
+            android:text="view tasks for" />
+
+        <Spinner
+            android:id="@+id/groupView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/taskView"
+            android:layout_marginEnd="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_toLeftOf="@+id/taskView"
+            android:layout_toStartOf="@+id/taskView" />
+
+        <Spinner
+            android:id="@+id/taskView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/viewText" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
-        android:layout_height="390dp"
+        android:layout_height="300dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="60dp"
-        android:id="@+id/relativeLayout4">
+        tools:layout_editor_absoluteY="60dp">
 
         <ListView
             android:id="@+id/taskList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
     </RelativeLayout>
 
@@ -32,7 +72,8 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        android:id="@+id/relativeLayout5">
 
         <Button
             android:id="@+id/toRewards"
@@ -93,6 +134,33 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/round_button"
             android:text="Settings" />
+
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/Ressources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="ressources" />
+
+    <Button
+        android:id="@+id/viewScores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout3"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:text="view scores" />
+
+    <Button
+        android:id="@+id/groups"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout3"
+        android:layout_centerHorizontal="true"
+        android:text="groups" />
 
 </RelativeLayout>

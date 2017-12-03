@@ -17,6 +17,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <EditText
+            android:id="@+id/points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/userSpinner"
+            android:layout_alignLeft="@+id/taskDescription"
+            android:layout_alignStart="@+id/taskDescription"
+            android:ems="10"
+            android:hint="points"
+            android:inputType="number" />
+
         <Spinner
             android:id="@+id/monthSpinner"
             android:layout_width="150dp"
@@ -49,10 +60,9 @@
             android:id="@+id/assignedToText"
             android:layout_width="99dp"
             android:layout_height="47dp"
+            android:layout_above="@+id/dueDateID"
             android:layout_alignLeft="@+id/dueDateID"
             android:layout_alignStart="@+id/dueDateID"
-            android:layout_below="@+id/taskDescription"
-            android:layout_marginTop="27dp"
             android:text="AssignedTo"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -106,7 +116,6 @@
             android:layout_alignLeft="@+id/taskName"
             android:layout_alignStart="@+id/taskName"
             android:layout_below="@+id/taskName"
-            android:layout_marginTop="11dp"
             android:ems="10"
             android:hint="Detail"
             android:inputType="textMultiLine"
@@ -119,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="21dp"
+            android:layout_marginTop="14dp"
             android:ems="10"
             android:hint="Name"
             android:inputType="textPersonName"
@@ -130,9 +139,9 @@
             android:id="@+id/dueDateID"
             android:layout_width="170dp"
             android:layout_height="28dp"
-            android:layout_alignLeft="@+id/daySpinner"
-            android:layout_alignStart="@+id/daySpinner"
-            android:layout_below="@+id/userSpinner"
+            android:layout_above="@+id/dayText"
+            android:layout_alignLeft="@+id/dayText"
+            android:layout_alignStart="@+id/dayText"
             android:text="Due date :"
             android:textAlignment="gravity"
             android:textSize="18sp"
@@ -180,6 +189,15 @@
             android:layout_centerHorizontal="true"
             android:background="@drawable/round_button"
             android:text="CREATE" />
+
+        <Button
+            android:id="@+id/addRessources"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/createTaskButton"
+            android:layout_toEndOf="@+id/createTaskButton"
+            android:layout_toRightOf="@+id/createTaskButton"
+            android:text="add ressources" />
 
         <Button
             android:id="@+id/addRewardButton"

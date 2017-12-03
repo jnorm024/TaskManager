@@ -31,6 +31,7 @@ public class TaskCreation extends AppCompatActivity {
 
     EditText taskName;
     EditText taskDescription;
+    EditText points;
     Spinner assignedTo;
     Spinner daySpinner;
     Spinner monthSpinner;
@@ -51,6 +52,7 @@ public class TaskCreation extends AppCompatActivity {
 
         taskName = (EditText) findViewById(R.id.taskName);
         taskDescription = (EditText) findViewById(R.id.taskDescription);
+        points = (EditText) findViewById(R.id.points);
         repetitive = (CheckBox) findViewById(R.id.repetitiveTask);
 
 
@@ -211,9 +213,15 @@ public class TaskCreation extends AppCompatActivity {
         boolean repeat = repetitive.isChecked();
         String date = yearSpinner.getSelectedItem().toString()+monthSpinner.getSelectedItem().toString()+daySpinner.getSelectedItem().toString();
         String userName = assignedTo.getSelectedItem().toString();
+        int taskPoints = -1;
+        try {
+            taskPoints = Integer.parseInt(points.getText().toString().trim());
+        } catch(Exception e) {
+            Toast.makeText(this, "Invalid input at points, write a number!", Toast.LENGTH_LONG).show();
+        }
 
         //checking if the value is provided
-        if (!TextUtils.isEmpty(name)) {
+        if (!TextUtils.isEmpty(name) && taskPoints!=-1) {
             //setting editText to blank again
             taskName.setText("");
             taskDescription.setText("");
@@ -223,7 +231,7 @@ public class TaskCreation extends AppCompatActivity {
             String id = tasksRef.push().getKey();
 
             //creating a new Reward Object
-            Task newTask =  new Task(id, name, description, date, repeat);
+            Task newTask =  new Task(id, name, description, date, repeat, taskPoints);
             /**
              * Si le user est un parent je compare le choix qu'il a fait dans la liste déroulante,
              * Si ce choix correspond à un usager et non bonus, alors j'assigne le id de l'usager relié
@@ -233,8 +241,6 @@ public class TaskCreation extends AppCompatActivity {
                 for(User user : LoginActivity.users) {
                     if(user.getName().equals(userName)){
                             newTask.setAssignedUserId(user.getUserId());
-                            //System.out.println(user.getName());
-                            //System.out.println(newTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!");
                             break;
                     }
                 }
@@ -250,7 +256,7 @@ public class TaskCreation extends AppCompatActivity {
             Toast.makeText(this, "Task created", Toast.LENGTH_LONG).show();
         } else {
             //if the value is not given displaying a toast
-            Toast.makeText(this, "Please enter a valid name", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_LONG).show();
         }
     }
 

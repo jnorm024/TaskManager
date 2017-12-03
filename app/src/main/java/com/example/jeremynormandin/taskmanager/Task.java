@@ -15,18 +15,20 @@ public class Task implements Serializable {
     private String dueDate;
     private boolean isAccomplished = false;
     private boolean isRepeated;
+    private int points;
 
     private String assignedUserId;
     private String associatedRewardId;
 
     public Task() {}
 
-    public Task(String taskId, String name, String details, String dueDate, boolean isRepeated) {
+    public Task(String taskId, String name, String details, String dueDate, boolean isRepeated, int points) {
         this.taskId = taskId;
         this.name = name;
         this.details = details;
         this.dueDate = dueDate;
         this.isRepeated = isRepeated;
+        this.points = points;
     }
 
     public String getTaskId() {return this.taskId;}
@@ -64,5 +66,9 @@ public class Task implements Serializable {
         isAccomplished = true;
     }
     public void reset() { isAccomplished = false; }
+
+    public int getPoints() {
+        return this.points;
+    }
 
     }
