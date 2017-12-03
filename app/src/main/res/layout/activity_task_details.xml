@@ -19,7 +19,7 @@
             android:id="@+id/setAsCompleted"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_above="@+id/delete"
+            android:layout_above="@+id/modify"
             android:layout_alignLeft="@+id/delete"
             android:layout_alignStart="@+id/delete"
             android:background="@drawable/round_button"
@@ -30,20 +30,22 @@
             android:id="@+id/delete"
             android:layout_width="150dp"
             android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
+            android:layout_marginBottom="15dp"
             android:background="@drawable/round_button"
             android:text="Delete Task" />
 
         <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="100dp"
+            android:id="@+id/modify"
+            android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="11dp"
+            android:layout_above="@+id/delete"
+            android:layout_alignLeft="@+id/setAsCompleted"
+            android:layout_alignStart="@+id/setAsCompleted"
             android:background="@drawable/round_button"
-            android:text="Cancel" />
+            android:text="modify task" />
+
     </RelativeLayout>
 
     <TextView
@@ -51,8 +53,9 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_below="@+id/taskName"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/dueDateView"
+        android:layout_toRightOf="@+id/dueDateView"
         android:text="Task Details"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -63,8 +66,8 @@
         android:layout_height="50dp"
         android:layout_alignLeft="@+id/taskDetails"
         android:layout_alignStart="@+id/taskDetails"
-        android:layout_alignTop="@+id/button"
-        android:layout_marginTop="36dp"
+        android:layout_below="@+id/cancelButton"
+        android:layout_marginTop="32dp"
         android:text="Task Name"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -75,7 +78,6 @@
         android:layout_height="50dp"
         android:layout_below="@+id/taskDetails"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="17dp"
         android:text="Assigned TO"
         android:textSize="18sp" />
 
@@ -85,7 +87,6 @@
         android:layout_height="50dp"
         android:layout_below="@+id/assignedTo"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="22dp"
         android:text="Due Date"
         android:textSize="18sp" />
 
@@ -137,11 +138,14 @@
         android:textSize="18sp" />
 
     <Button
-        android:id="@+id/modify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dueDate"
-        android:layout_centerHorizontal="true"
-        android:text="modify task" />
+        android:id="@+id/cancelButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/taskName"
+        android:layout_toStartOf="@+id/taskName"
+        android:background="@drawable/round_button"
+        android:text="Back" />
 
 </RelativeLayout>
