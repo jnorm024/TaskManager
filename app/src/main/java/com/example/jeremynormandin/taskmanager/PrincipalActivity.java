@@ -24,7 +24,7 @@ import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity implements Serializable  {
 
-    TextView nameView;
+    //TextView nameView;
     Spinner taskView;
     Spinner groupView;
     /**
@@ -100,8 +100,8 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                         //handle databaseError
                     }
                 });
-        nameView = (TextView) findViewById(R.id.nameView);
-        nameView.setText(loginUser.getName());
+        //nameView = (TextView) findViewById(R.id.nameView);
+       // nameView.setText(loginUser.getName());
 
         Button newTask = (Button) findViewById(R.id.addNewTask);
         newTask.setOnClickListener(new View.OnClickListener(){
@@ -143,13 +143,13 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             }
         });
 
-        Button groups = (Button) findViewById(R.id.groups);
+        /*Button groups = (Button) findViewById(R.id.groups);
         groups.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
                 startActivity(new Intent(PrincipalActivity.this, View_Groups.class));
                 finish();
             }
-        });
+        });*/
 
 
     }
