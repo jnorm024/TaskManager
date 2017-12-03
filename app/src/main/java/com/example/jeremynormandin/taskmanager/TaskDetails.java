@@ -38,15 +38,15 @@ public class TaskDetails extends AppCompatActivity {
         taskDetails.setText(selectedTask.getDetails());
 
         TextView assignedTo = (TextView) findViewById(R.id.assignedTo);
-        System.out.println(selectedTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(selectedTask.getIsAssigned());
+        //System.out.println(selectedTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+       // System.out.println(selectedTask.getIsAssigned());
         if(!selectedTask.getIsAssigned()) {
              assignedTo.setText("Bonus");
         } else {
             for(User user : LoginActivity.users) {
-                System.out.println(selectedTask.getAssignedUserId()+" vs "+user.getUserId());
+               // System.out.println(selectedTask.getAssignedUserId()+" vs "+user.getUserId());
                 if(selectedTask.getAssignedUserId().equals(user.getUserId())) {
-                    System.out.println(user.getName()+" user name found !!!!!!!!!!!!!!!!!!");
+                //    System.out.println(user.getName()+" user name found !!!!!!!!!!!!!!!!!!");
                     assignedTo.setText(user.getName());
                 }
             }
@@ -107,6 +107,7 @@ public class TaskDetails extends AppCompatActivity {
                     if(selectedTask.getAssociatedRewardId()!=null) {
                         rewardsRef.child(selectedTask.getAssociatedRewardId()).removeValue();
                     }
+                    PrincipalActivity.tasks.remove(selectedTask);
                     Toast.makeText(TaskDetails.this,"This task is removed",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
                     finish();

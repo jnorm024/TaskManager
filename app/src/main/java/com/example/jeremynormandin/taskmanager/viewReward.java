@@ -43,7 +43,7 @@ public class viewReward extends AppCompatActivity {
         viewRewardFor.setSelection(spinnerUser);
 
         final ListView rewardList= (ListView) findViewById(R.id.rewardList);
-        final ArrayList<String> list= new ArrayList<String>();
+        final ArrayList<String> list = new ArrayList<String>();
         rewards = new HashMap<>();
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         rewardsRef = databaseTasksManagement.child("rewards");

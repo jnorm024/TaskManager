@@ -192,7 +192,7 @@ public class TaskCreation extends AppCompatActivity {
 
             for (User user : LoginActivity.users) {
                 list.add(user.getName());
-                System.out.println(user.getName());
+                //System.out.println(user.getName());
             }
             for (String userName : list) {
                 System.out.println(userName);
@@ -233,8 +233,8 @@ public class TaskCreation extends AppCompatActivity {
                 for(User user : LoginActivity.users) {
                     if(user.getName().equals(userName)){
                             newTask.setAssignedUserId(user.getUserId());
-                            System.out.println(user.getName());
-                            System.out.println(newTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!");
+                            //System.out.println(user.getName());
+                            //System.out.println(newTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!");
                             break;
                     }
                 }
