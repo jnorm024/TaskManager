@@ -64,8 +64,11 @@ public class viewReward extends AppCompatActivity {
                         User selectedUser = getSelectedUser();
                         final ArrayList<Reward> userRewards = getRewardsList(selectedUser);
 
+
                         for (Reward reward : userRewards){
-                            list.add(reward.getName());
+                            if(reward!=null) {
+                                list.add(reward.getName());
+                            }
                         }
                         ArrayAdapter adapter = new ArrayAdapter(viewReward.this, android.R.layout.simple_list_item_1, list);
                         rewardList.setAdapter(adapter);

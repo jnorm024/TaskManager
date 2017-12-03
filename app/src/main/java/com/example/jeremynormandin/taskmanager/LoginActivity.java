@@ -253,20 +253,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private boolean isValid(String email, String password) {
         boolean isValid;
         for(User user : users) {
-            if (user.getName().length() == email.length() && user.getPassword().length() == password.length()) {
-                isValid = true;
-                for (int i = 0; i < email.length(); i++) {
-                    if (email.charAt(i) != user.getName().charAt(i)) isValid = false;
-                }
-                for (int i = 0; i < password.length(); i++) {
-                    if (password.charAt(i) != user.getPassword().charAt(i)) isValid = false;
-                }
-                if(isValid == true) {
-                    PrincipalActivity.setLoginUser(user);
-                    return true;
-            }}
+            if (user.getName().equals(email) && user.getPassword().equals(password)) {
+                PrincipalActivity.setLoginUser(user);
+                return true;
+            }
         }
-
         return false;
     }
 

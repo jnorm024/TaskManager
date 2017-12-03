@@ -2,17 +2,15 @@ package com.example.jeremynormandin.taskmanager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
 
 
 public class Settings extends AppCompatActivity {
@@ -41,7 +39,6 @@ public class Settings extends AppCompatActivity {
         Button deleteUser = (Button) findViewById(R.id.deleteUser);
         deleteUser.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
-                // TODO implémentation de suppression de l'utilisateur
                 //Il faut une confirmation first pour éviter les suppressions sans le vouloir
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(Settings.this);
@@ -56,16 +53,13 @@ public class Settings extends AppCompatActivity {
                         tasksRef = databaseTasksManagement.child("tasks");
                         rewardsRef = databaseTasksManagement.child("rewards");
                         usersRef = databaseTasksManagement.child("users");
-                        for (int i = 0; i < PrincipalActivity.tasks.size(); i++) {
-                            if (PrincipalActivity.tasks.get(i).getAssignedUserId() == null) {
-                            } else if (PrincipalActivity.tasks.get(i).getAssignedUserId().equals(PrincipalActivity.getLoginUser().getUserId())) {
-                                tasksRef.child(PrincipalActivity.tasks.get(i).getTaskId()).removeValue();
-                                if (PrincipalActivity.tasks.get(i).getAssociatedRewardId() != null) {
-                                    //removes from rewards somewhere else
-                                    rewardsRef.child(PrincipalActivity.tasks.get(i).getAssociatedRewardId()).removeValue();
+                        for(Task task : PrincipalActivity.tasks) {
+                            if(PrincipalActivity.getLoginUser().getUserId().equals(task.getAssignedUserId())) {
+                                System.out.println("has a task !!!!!!!!!!!!"+task.getName());
+                                if(task.gethasReward()) {
+                                    rewardsRef.child(task.getAssociatedRewardId()).removeValue();
                                 }
-                                PrincipalActivity.tasks.remove(PrincipalActivity.tasks.get(i));
-                                i--;
+                                tasksRef.child(task.getTaskId()).removeValue();
                             }
                         }
 

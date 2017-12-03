@@ -48,6 +48,7 @@ public class giveRewards extends AppCompatActivity {
                         if(!task.getIsRepeated()) {
                             tasksRef.child(task.getTaskId()).removeValue();
                             rewardsRef.child(reward.getRewardId()).removeValue();
+                            viewReward.rewards.remove(reward.getRewardId());
                         } else {
                             PrincipalActivity.tasks.remove(task);
                             task.reset();

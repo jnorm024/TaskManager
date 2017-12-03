@@ -11,6 +11,7 @@ public class Task implements Serializable {
     private String name;
     private String details;
     private boolean isAssigned = false;
+    private boolean hasReward = false;
     private String dueDate;
     private boolean isAccomplished = false;
     private boolean isRepeated;
@@ -49,12 +50,14 @@ public class Task implements Serializable {
     }
     public String getAssignedUserId() {return this.assignedUserId;}
     public String getAssociatedRewardId() {return this.associatedRewardId;}
+    public boolean gethasReward() {return this.hasReward;}
 
     public void setAssignedUserId(String id) {
         isAssigned = true;
         assignedUserId = id;
     }
     public void setAssociatedRewardId(String id) {
+        hasReward = true;
         associatedRewardId = id;
     }
     public void setAccomplished() {

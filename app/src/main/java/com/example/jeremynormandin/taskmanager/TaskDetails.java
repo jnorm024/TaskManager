@@ -104,7 +104,7 @@ public class TaskDetails extends AppCompatActivity {
                     builder.show();
                 }else{
                     tasksRef.child(selectedTask.getTaskId()).removeValue();
-                    if(selectedTask.getAssociatedRewardId()!=null) {
+                    if(selectedTask.gethasReward()) {
                         rewardsRef.child(selectedTask.getAssociatedRewardId()).removeValue();
                     }
                     PrincipalActivity.tasks.remove(selectedTask);
