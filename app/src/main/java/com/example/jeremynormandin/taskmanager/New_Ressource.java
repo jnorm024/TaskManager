@@ -35,7 +35,7 @@ public class New_Ressource extends AppCompatActivity {
             }
         });
 
-
+        addGroups();
 
     }
 
@@ -43,7 +43,11 @@ public class New_Ressource extends AppCompatActivity {
         Spinner groupsSpinner = (Spinner) findViewById(R.id.groups);
 
         List<String> list= new ArrayList<String>();
-        //TODO remplir le spinner et ajouter addGroups() dans le onCreate --JN
+        list.add("Outdoor work");
+        list.add("Household");
+        list.add("Personnal");
+        list.add("Shopping");
+        list.add("Others");
 
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);

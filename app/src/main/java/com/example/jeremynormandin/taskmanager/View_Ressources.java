@@ -19,6 +19,8 @@ public class View_Ressources extends AppCompatActivity {
         setContentView(R.layout.activity_view__ressources);
         getSupportActionBar().setTitle("Ressources");
 
+        addGroups();
+
         Button homeButton= (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,13 +53,19 @@ public class View_Ressources extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void addGroups(){
         Spinner groupsSpinner = (Spinner) findViewById(R.id.groups);
 
         List<String> list= new ArrayList<String>();
-        //TODO remplir le spinner et ajouter addGroups() dans le onCreate --JN
+        list.add("Outdoor work");
+        list.add("Household");
+        list.add("Personnal");
+        list.add("Shopping");
+        list.add("Others");
 
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);

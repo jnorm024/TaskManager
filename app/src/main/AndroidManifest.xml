@@ -33,8 +33,7 @@
         <activity android:name=".TaskDetails" />
         <activity android:name=".Settings" />
         <activity android:name=".View_Ressources" />
-        <activity android:name=".View_Groups" />
-        <activity android:name=".New_Ressource"></activity>
+        <activity android:name=".New_Ressource" />
     </application>
 
 </manifest>
