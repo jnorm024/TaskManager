@@ -18,8 +18,7 @@
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/descView"
-            android:layout_marginTop="20dp">
+            android:layout_below="@+id/descView">
 
             <TextView
                 android:id="@+id/reassignView"
@@ -118,16 +117,26 @@
                 android:layout_alignTop="@+id/daySpinner"
                 android:layout_centerHorizontal="true" />
 
+            <Button
+                android:id="@+id/manageRes"
+                android:layout_width="160dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/monthSpinner"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="13dp"
+                android:background="@drawable/round_button"
+                android:text="Manage Ressources" />
+
         </RelativeLayout>
 
         <TextView
             android:id="@+id/nameView"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/name"
+            android:layout_alignBottom="@+id/name"
             android:layout_alignLeft="@+id/descView"
-            android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/descView"
-            android:layout_marginTop="48dp"
             android:text="TextView"
             android:textAlignment="viewStart"
             android:textColor="@color/colorAccent"
@@ -139,7 +148,7 @@
             android:layout_height="50dp"
             android:layout_below="@+id/nameView"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="18dp"
             android:text="TextView"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
@@ -148,9 +157,10 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/nameView"
-            android:layout_marginEnd="41dp"
-            android:layout_marginRight="41dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="14dp"
             android:layout_toLeftOf="@+id/nameView"
             android:layout_toStartOf="@+id/nameView"
             android:text="Name : "
@@ -177,7 +187,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/round_button"
         android:text="Cancel" />
 
@@ -187,7 +197,7 @@
         android:layout_height="50dp"
         android:layout_above="@+id/cancelButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="11dp"
         android:background="@drawable/round_button"
         android:text="Apply Changes" />
 

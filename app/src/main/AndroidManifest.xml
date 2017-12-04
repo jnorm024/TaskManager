@@ -35,7 +35,9 @@
         <activity android:name=".View_Ressources" />
         <activity android:name=".New_Ressource" />
         <activity android:name=".ViewScore" />
-        <activity android:name=".ModifyTask"></activity>
+        <activity android:name=".ModifyTask" />
+        <activity android:name=".ManageRessources" />
+        <activity android:name=".AddResToTask"></activity>
     </application>
 
 </manifest>
