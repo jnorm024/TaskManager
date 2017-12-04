@@ -58,6 +58,10 @@ public class Task implements Serializable {
         isAssigned = true;
         assignedUserId = id;
     }
+
+    public void setIsUnassigned(){
+        isAssigned = false;
+    }
     public void setAssociatedRewardId(String id) {
         hasReward = true;
         associatedRewardId = id;

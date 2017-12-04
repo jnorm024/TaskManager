@@ -127,11 +127,26 @@ public class TaskDetails extends AppCompatActivity {
         modifyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Task taskToModify= selectedTask;
-                Intent myIntent = new Intent(TaskDetails.this, ModifyTask.class);
-                myIntent.putExtra("task", taskToModify);
-                startActivity(myIntent);
-                finish();
+                if(!PrincipalActivity.getLoginUser().getIsParent()) {
+                    AlertDialog.Builder builder;
+                    builder = new AlertDialog.Builder(TaskDetails.this);
+                    builder.setTitle("Can't proceed");
+                    builder.setMessage("Only a parent can modify a task.");
+                    builder.setNeutralButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    builder.show();
+                }
+                else {
+                    Task taskToModify = selectedTask;
+                    Intent myIntent = new Intent(TaskDetails.this, ModifyTask.class);
+                    myIntent.putExtra("task", taskToModify);
+                    startActivity(myIntent);
+                    finish();
+                }
             }
         });
 

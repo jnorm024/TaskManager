@@ -20,6 +20,7 @@ public class ModifyTask extends AppCompatActivity {
     Spinner daySpinner;
     Spinner monthSpinner;
     Spinner yearSpinner;
+    Spinner assignedTo;
 
     String dueDate;
 
@@ -57,13 +58,22 @@ public class ModifyTask extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener(){
            @Override
             public void onClick (View v){
-               System.out.println(taskToModify.getTaskId());
+
                for (Task task : PrincipalActivity.tasks){
                    if(taskToModify.getTaskId().equals(task.getTaskId())){
                        PrincipalActivity.tasks.remove(task);
-                       System.out.println(task.getDueDate());
+
                        task.setDueDate(yearSpinner.getSelectedItem().toString(),monthSpinner.getSelectedItem().toString(),daySpinner.getSelectedItem().toString());
-                       System.out.println(task.getDueDate());
+                       for(User user: LoginActivity.users){
+                           if(assignedTo.getSelectedItem().toString().equals("bonus")){
+                               task.setIsUnassigned();
+                           }
+
+                           if(assignedTo.getSelectedItem().toString().equals(user.getName())){
+
+                               task.setAssignedUserId(user.getUserId());
+                           }
+                       }
                        PrincipalActivity.tasks.add(task);
                        tasksRef.child(task.getTaskId()).setValue(task);
                        break;
@@ -100,7 +110,7 @@ public class ModifyTask extends AppCompatActivity {
 
 
     public void assignToUser() {
-        Spinner assignedTo = (Spinner) findViewById(R.id.usersSpin);
+        assignedTo = (Spinner) findViewById(R.id.usersSpin);
         List<String> list = new ArrayList<String>();
         list.add("bonus");
 
