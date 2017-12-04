@@ -39,6 +39,7 @@ public class TaskCreation extends AppCompatActivity {
     CheckBox repetitive;
     Button addRewardButton;
     Button createTaskButton;
+    Spinner groupsSpinner;
 
 
     @Override
@@ -46,6 +47,7 @@ public class TaskCreation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_creation);
         getSupportActionBar().setTitle("New task creation");
+        addGroups();
 
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
@@ -55,22 +57,26 @@ public class TaskCreation extends AppCompatActivity {
         points = (EditText) findViewById(R.id.points);
         repetitive = (CheckBox) findViewById(R.id.repetitiveTask);
 
-
+        //TODO ajouter le groupe sélectionné à la tâche
         addRewardButton = (Button) findViewById(R.id.addRewardButton);
         addRewardButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                addTask();
-                startActivity(new Intent(TaskCreation.this, createReward.class));
-                finish();
+                int input = addTask();
+                if(input==0) {
+                    startActivity(new Intent(TaskCreation.this, createReward.class));
+                    finish();
+                }
 
             }
         });
         createTaskButton = (Button) findViewById(R.id.createTaskButton);
         createTaskButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                addTask();
-                startActivity(new Intent(TaskCreation.this, PrincipalActivity.class));
-                finish();
+                int input = addTask();
+                if(input==0) {
+                    startActivity(new Intent(TaskCreation.this, PrincipalActivity.class));
+                    finish();
+                }
 
             }
         });
@@ -207,7 +213,7 @@ public class TaskCreation extends AppCompatActivity {
         assignedTo.setAdapter(dataAdapter);
     }
 
-    private void addTask() {
+    private int addTask() {
         String name = taskName.getText().toString().trim();
         String description = taskDescription.getText().toString();
         boolean repeat = repetitive.isChecked();
@@ -254,9 +260,11 @@ public class TaskCreation extends AppCompatActivity {
 
             //displaying a success toast
             Toast.makeText(this, "Task created", Toast.LENGTH_LONG).show();
+            return 0;
         } else {
             //if the value is not given displaying a toast
             Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_LONG).show();
+            return -1;
         }
     }
 
@@ -264,5 +272,23 @@ public class TaskCreation extends AppCompatActivity {
     */
     public void onBackPressed() {
         // do nothing. We want to force user to stay in this activity and not drop out.
+    }
+    public void addGroups(){
+        groupsSpinner = (Spinner) findViewById(R.id.groupSpinner);
+
+        List<String> list= new ArrayList<String>();
+        list.add("Outdoor work");
+        list.add("Household");
+        list.add("Personnal");
+        list.add("Shopping");
+        list.add("Others");
+
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
+
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        groupsSpinner.setAdapter(dataAdapter);
+
     }
 }

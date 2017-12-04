@@ -16,6 +16,7 @@ public class Task implements Serializable {
     private boolean isAccomplished = false;
     private boolean isRepeated;
     private int points;
+    private String group;
 
     private String assignedUserId;
     private String associatedRewardId;
