@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +23,18 @@ public class ModifyTask extends AppCompatActivity {
 
     String dueDate;
 
+    private DatabaseReference databaseTasksManagement;
+    private DatabaseReference tasksRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_task);
         getSupportActionBar().setTitle("Modify a task");
         final Task taskToModify = (Task) getIntent().getSerializableExtra("task");
+
+        databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
+        tasksRef = databaseTasksManagement.child("tasks");
 
         dueDate= taskToModify.getDueDate();
 
@@ -49,11 +58,15 @@ public class ModifyTask extends AppCompatActivity {
            @Override
             public void onClick (View v){
                System.out.println(taskToModify.getTaskId());
-               for (int i=0; i< PrincipalActivity.tasks.size(); i++){
-                   if(taskToModify.getTaskId().equals(PrincipalActivity.tasks.get(i).getTaskId())){
-                       System.out.println(PrincipalActivity.tasks.get(i).getDueDate());
-                       PrincipalActivity.tasks.get(i).setDueDate(yearSpinner.getSelectedItem().toString(),monthSpinner.getSelectedItem().toString(),daySpinner.getSelectedItem().toString());
-                       System.out.println(PrincipalActivity.tasks.get(i).getDueDate());
+               for (Task task : PrincipalActivity.tasks){
+                   if(taskToModify.getTaskId().equals(task.getTaskId())){
+                       PrincipalActivity.tasks.remove(task);
+                       System.out.println(task.getDueDate());
+                       task.setDueDate(yearSpinner.getSelectedItem().toString(),monthSpinner.getSelectedItem().toString(),daySpinner.getSelectedItem().toString());
+                       System.out.println(task.getDueDate());
+                       PrincipalActivity.tasks.add(task);
+                       tasksRef.child(task.getTaskId()).setValue(task);
+                       break;
                    }
 
                }
