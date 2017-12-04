@@ -91,9 +91,7 @@ public class TaskDetails extends AppCompatActivity {
         Button delete = (Button) findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener(){
             public void onClick (View v){
-                /* if user == parent, on delete la task autrement le button fait juste envoyé un pop-up comme quoi
-                   l'utilisateur n'est pas un parent
-                 */
+
                 if(!PrincipalActivity.getLoginUser().getIsParent()) {
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(TaskDetails.this);
@@ -122,6 +120,18 @@ public class TaskDetails extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
+            }
+        });
+
+        Button modifyButton= (Button) findViewById(R.id.modifyButton);
+        modifyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Task taskToModify= selectedTask;
+                Intent myIntent = new Intent(TaskDetails.this, ModifyTask.class);
+                myIntent.putExtra("task", taskToModify);
+                startActivity(myIntent);
+                finish();
             }
         });
 

@@ -19,7 +19,7 @@
             android:id="@+id/setAsCompleted"
             android:layout_width="150dp"
             android:layout_height="50dp"
-            android:layout_above="@+id/modify"
+            android:layout_above="@+id/modifyButton"
             android:layout_alignLeft="@+id/delete"
             android:layout_alignStart="@+id/delete"
             android:background="@drawable/round_button"
@@ -37,7 +37,7 @@
             android:text="Delete Task" />
 
         <Button
-            android:id="@+id/modify"
+            android:id="@+id/modifyButton"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_above="@+id/delete"

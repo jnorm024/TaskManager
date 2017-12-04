@@ -62,7 +62,10 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             //getting task
                             Task task =  postSnapshot.getValue(Task.class);
+                            /*
+                            Print à retirer
                             System.out.println(task.getName());
+                             */
                             //adding task to the list
                             tasks.add(task);
 

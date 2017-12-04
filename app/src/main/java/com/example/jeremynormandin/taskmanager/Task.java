@@ -62,6 +62,10 @@ public class Task implements Serializable {
         hasReward = true;
         associatedRewardId = id;
     }
+    public void setDueDate(String year, String month, String day){
+        dueDate= year+month+day;
+    }
+
     public void setAccomplished() {
         isAccomplished = true;
     }
@@ -72,3 +76,7 @@ public class Task implements Serializable {
     }
 
     }
+
+
+
+

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jeremynormandin.taskmanager.ModifyTask">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/descView"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/reassignView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/usersSpin"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_toLeftOf="@+id/usersSpin"
+                android:layout_toStartOf="@+id/usersSpin"
+                android:text="Reassign to : "
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/reportDueDate"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/usersSpin"
+                android:text="Report Task to : "
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/yearText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/monthText"
+                android:layout_alignBottom="@+id/monthText"
+                android:layout_alignLeft="@+id/yearSpinner"
+                android:layout_alignStart="@+id/yearSpinner"
+                android:text="Year :"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/usersSpin"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/descView"
+                android:layout_marginEnd="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="19dp" />
+
+            <TextView
+                android:id="@+id/monthText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/daySpinner"
+                android:layout_alignLeft="@+id/monthSpinner"
+                android:layout_alignStart="@+id/monthSpinner"
+                android:text="Month : "
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dayText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/usersSpin"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="42dp"
+                android:text="Day :"
+                android:textColor="@color/colorAccent"
+                android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/yearSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/monthSpinner"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp" />
+
+            <Spinner
+                android:id="@+id/daySpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignLeft="@+id/dayText"
+                android:layout_alignStart="@+id/dayText"
+                android:layout_below="@+id/dayText" />
+
+            <Spinner
+                android:id="@+id/monthSpinner"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/daySpinner"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/nameView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignLeft="@+id/descView"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/descView"
+            android:layout_marginTop="48dp"
+            android:text="TextView"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/descView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/nameView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/nameView"
+            android:layout_marginEnd="41dp"
+            android:layout_marginRight="41dp"
+            android:layout_toLeftOf="@+id/nameView"
+            android:layout_toStartOf="@+id/nameView"
+            android:text="Name : "
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/descView"
+            android:layout_alignBottom="@+id/descView"
+            android:layout_alignEnd="@+id/name"
+            android:layout_alignRight="@+id/name"
+            android:text="Description :"
+            android:textColor="@color/colorAccent"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="28dp"
+        android:background="@drawable/round_button"
+        android:text="Cancel" />
+
+    <Button
+        android:id="@+id/applyChanges"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_above="@+id/cancelButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/round_button"
+        android:text="Apply Changes" />
+
+
+</RelativeLayout>
