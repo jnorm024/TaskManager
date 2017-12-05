@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class View_Ressources extends AppCompatActivity {
+    Spinner groupsSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +22,10 @@ public class View_Ressources extends AppCompatActivity {
         getSupportActionBar().setTitle("Ressources");
 
         addGroups();
+        if(getIntent().hasExtra("group")) {
+            final Integer spinnerGroup = (Integer) getIntent().getSerializableExtra("group");
+            groupsSpinner.setSelection(spinnerGroup);
+        }
 
         Button homeButton= (Button) findViewById(R.id.homeButton);
         homeButton.setOnClickListener(new View.OnClickListener() {
@@ -30,24 +36,35 @@ public class View_Ressources extends AppCompatActivity {
         });
 
 
-        //TODO (DONE) delete ces deux boutons useless!!!
-
-
-
         Button refreshButton= (Button) findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent myIntent = new Intent(View_Ressources.this, View_Ressources.class);
+                myIntent.putExtra("group", groupsSpinner.getSelectedItemPosition());
+                startActivity(myIntent);
+                finish();
             }
         });
 
-
+        ArrayList<String> ressourcesList = new ArrayList<>();
+        for(Task task : PrincipalActivity.tasks) {
+            if(groupsSpinner.getSelectedItem().toString().equals(task.getGroup())) {
+                for(Ressources r : PrincipalActivity.ressourcesList) {
+                    if(r.getRelatedTaskId().equals(task.getTaskId())) {
+                        ressourcesList.add(r.getName());
+                    }
+                }
+            }
+        }
+        final ListView resList= (ListView) findViewById(R.id.resList);
+        ArrayAdapter adapter = new ArrayAdapter(View_Ressources.this, android.R.layout.simple_list_item_1, ressourcesList);
+        resList.setAdapter(adapter);
 
     }
 
     public void addGroups(){
-        Spinner groupsSpinner = (Spinner) findViewById(R.id.groups);
+        groupsSpinner = (Spinner) findViewById(R.id.groups);
 
         List<String> list= new ArrayList<String>();
         list.add("Outdoor work");

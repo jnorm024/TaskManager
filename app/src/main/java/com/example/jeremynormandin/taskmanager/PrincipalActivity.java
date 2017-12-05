@@ -115,7 +115,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                 }
                             }
                             for (Task task : listedTask) {
-                                if (!task.getAssignedUserId().equals(user.getUserId())) {
+                                if (!user.getUserId().equals(task.getAssignedUserId())) {
                                     list.remove(task.getName());
                                 }
                             }
@@ -123,8 +123,6 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                         if(!groupView.getSelectedItem().toString().equals("all groups")) {
                             for (Task task : listedTask) {
                                 if (!task.getGroup().equals(groupView.getSelectedItem().toString())) {
-                                    System.out.println(groupView.getSelectedItem().toString()+"!!!!!!!!!!!!!!!!");
-                                    System.out.println(task.getGroup());
                                     list.remove(task.getName());
                                 }
                             }
@@ -136,13 +134,16 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                 String name = (String) taskList.getItemAtPosition(pos);
 
                                 for (int i = 0; i < list.size(); i++) {
-                                    if(taskList.getItemAtPosition(pos).equals(listedTask.get(i).getName())){
-                                        Task selectedTask = listedTask.get(i);
-                                        Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
-                                        myIntent.putExtra("task", selectedTask);
-                                        startActivity(myIntent);
-                                        finish();
+                                    for(Task task : listedTask) {
+                                        if(taskList.getItemAtPosition(pos).equals(task.getName())){
+                                            Task selectedTask = task;
+                                            Intent myIntent = new Intent(PrincipalActivity.this, TaskDetails.class);
+                                            myIntent.putExtra("task", selectedTask);
+                                            startActivity(myIntent);
+                                            finish();
+                                        }
                                     }
+
                                 }
                             }
 
