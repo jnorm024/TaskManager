@@ -37,6 +37,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
      */
     private static User loginUser;
     static List<Task> tasks;
+    static List<Ressources> ressources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         getSupportActionBar().setTitle("Home - "+ loginUser.getName());
         setTaskViewSpinner();
         setGroupViewSpinner();
-
+        //TODO this create a new list everytime we open the App therefore kinda clears it
+        ressources = new ArrayList<>();
         tasks = new ArrayList<>();
         final ArrayList<Task> listedTask = new ArrayList<>();
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");

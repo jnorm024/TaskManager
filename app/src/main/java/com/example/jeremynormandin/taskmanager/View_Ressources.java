@@ -28,22 +28,11 @@ public class View_Ressources extends AppCompatActivity {
                 startActivity(new Intent(View_Ressources.this, PrincipalActivity.class));
             }
         });
-        Button addButton= (Button) findViewById(R.id.addButton);
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(View_Ressources.this, New_Ressource.class));
-            }
-        });
 
-        //TODO delete ces deux boutons useless!!!
-        Button deleteButton= (Button) findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        //TODO (DONE) delete ces deux boutons useless!!!
+
+
 
         Button refreshButton= (Button) findViewById(R.id.refreshButton);
         refreshButton.setOnClickListener(new View.OnClickListener() {

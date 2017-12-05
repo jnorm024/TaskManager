@@ -23,13 +23,14 @@ public class Task implements Serializable {
 
     public Task() {}
 
-    public Task(String taskId, String name, String details, String dueDate, boolean isRepeated, int points) {
+    public Task(String taskId, String name, String details, String dueDate, boolean isRepeated, int points, String group) {
         this.taskId = taskId;
         this.name = name;
         this.details = details;
         this.dueDate = dueDate;
         this.isRepeated = isRepeated;
         this.points = points;
+        this.group = group;
     }
 
     public String getTaskId() {return this.taskId;}
@@ -80,7 +81,8 @@ public class Task implements Serializable {
         return this.points;
     }
 
-    }
+    public String getGroup() { return this.group; }
+}
 
 
 

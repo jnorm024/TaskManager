@@ -1,7 +1,9 @@
 package com.example.jeremynormandin.taskmanager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -41,9 +43,29 @@ public class createReward extends AppCompatActivity {
         buttonAddReward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addReward();
-                startActivity(new Intent(createReward.this, PrincipalActivity.class));
-                finish();
+
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(createReward.this);
+                builder = new AlertDialog.Builder(createReward.this);
+                builder.setTitle("Do you want to add a ressource");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addReward();
+                        startActivity(new Intent(createReward.this, New_Ressource.class));
+
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addReward();
+                        startActivity(new Intent(createReward.this, PrincipalActivity.class));
+                    }
+
+                });
+                builder.show();
+                //finish();
             }
         });
 

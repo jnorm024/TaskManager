@@ -1,7 +1,9 @@
 package com.example.jeremynormandin.taskmanager;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -39,6 +41,7 @@ public class TaskCreation extends AppCompatActivity {
     CheckBox repetitive;
     Button addRewardButton;
     Button createTaskButton;
+    Button addRessourcesButton;
     Spinner groupsSpinner;
 
 
@@ -56,8 +59,9 @@ public class TaskCreation extends AppCompatActivity {
         taskDescription = (EditText) findViewById(R.id.taskDescription);
         points = (EditText) findViewById(R.id.points);
         repetitive = (CheckBox) findViewById(R.id.repetitiveTask);
+        groupsSpinner = (Spinner) findViewById(R.id.groupSpinner);
 
-        //TODO ajouter le groupe sélectionné à la tâche
+        //TODO (DONE) ajouter le groupe sélectionné à la tâche
         addRewardButton = (Button) findViewById(R.id.addRewardButton);
         addRewardButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -66,6 +70,33 @@ public class TaskCreation extends AppCompatActivity {
                     startActivity(new Intent(TaskCreation.this, createReward.class));
                     finish();
                 }
+
+            }
+        });
+        addRessourcesButton = (Button) findViewById(R.id.addRessources);
+        addRessourcesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(TaskCreation.this);
+                builder.setTitle("Do you want to create a reward first");
+                builder.setMessage("If you click no you will not be able to crate a reward for this activity");
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addTask();
+                        startActivity(new Intent(TaskCreation.this, createReward.class));
+
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        addTask();
+                        startActivity(new Intent(TaskCreation.this, New_Ressource.class));
+                    }
+
+                });
+                builder.show();
 
             }
         });
@@ -80,18 +111,7 @@ public class TaskCreation extends AppCompatActivity {
 
             }
         });
-        Button addRessourcesButton= (Button) findViewById(R.id.addRessources);
-        addRessourcesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int input = addTask();
-                if (input == 0) {
-                    startActivity(new Intent(TaskCreation.this, New_Ressource.class));
-                    finish();
-                }
 
-            }
-        });
 
 
                 Button cancelButton= (Button) findViewById(R.id.cancelButton);
@@ -232,6 +252,7 @@ public class TaskCreation extends AppCompatActivity {
         boolean repeat = repetitive.isChecked();
         String date = yearSpinner.getSelectedItem().toString()+monthSpinner.getSelectedItem().toString()+daySpinner.getSelectedItem().toString();
         String userName = assignedTo.getSelectedItem().toString();
+        String group = groupsSpinner.getSelectedItem().toString();
         int taskPoints = -1;
         try {
             taskPoints = Integer.parseInt(points.getText().toString().trim());
@@ -250,7 +271,7 @@ public class TaskCreation extends AppCompatActivity {
             String id = tasksRef.push().getKey();
 
             //creating a new Reward Object
-            Task newTask =  new Task(id, name, description, date, repeat, taskPoints);
+            Task newTask =  new Task(id, name, description, date, repeat, taskPoints, group);
             /**
              * Si le user est un parent je compare le choix qu'il a fait dans la liste déroulante,
              * Si ce choix correspond à un usager et non bonus, alors j'assigne le id de l'usager relié
