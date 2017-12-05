@@ -71,7 +71,7 @@ public class New_Ressource extends AppCompatActivity {
             //creating a new Ressources Object
             Ressources newRessource =  new Ressources( name, groupName, relatedTaskId, ressourceId);
 
-            PrincipalActivity.ressources.add(newRessource);
+            PrincipalActivity.ressourcesList.add(newRessource);
             ressourcesRef.child(ressourceId).setValue(newRessource);
 
             //displaying a success toast

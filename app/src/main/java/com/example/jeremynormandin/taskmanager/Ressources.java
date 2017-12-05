@@ -10,6 +10,8 @@ public class Ressources {
     private String relatedTaskId;
     private String ressourceId;
 
+    public Ressources() {}
+
     public Ressources(String name, String groupName, String relatedTaskId, String ressourceId) {
         this.name = name;
         this.relatedTaskId = relatedTaskId;

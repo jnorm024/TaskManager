@@ -31,13 +31,15 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
      */
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference tasksRef;
+    private DatabaseReference ressourcesRef;
+    private DatabaseReference usersRef;
     /**
      * Ces deux valeurs static permettent d'accéder à l'utilisateur
      * actuellement connecté et à la liste de toutes les tâches à partir de n'importe lequel autre activité
      */
     private static User loginUser;
     static List<Task> tasks;
-    static List<Ressources> ressources;
+    static List<Ressources> ressourcesList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +48,41 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         getSupportActionBar().setTitle("Home - "+ loginUser.getName());
         setTaskViewSpinner();
         setGroupViewSpinner();
+        if(getIntent().hasExtra("group") && getIntent().hasExtra("user")) {
+            final Integer spinnerGroup = (Integer) getIntent().getSerializableExtra("group");
+            final Integer spinnerUser = (Integer) getIntent().getSerializableExtra("user");
+            taskView.setSelection(spinnerUser);
+            groupView.setSelection(spinnerGroup);
+        }
         //TODO this create a new list everytime we open the App therefore kinda clears it
-        ressources = new ArrayList<>();
+        ressourcesList = new ArrayList<>();
         tasks = new ArrayList<>();
         final ArrayList<Task> listedTask = new ArrayList<>();
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
+        usersRef = databaseTasksManagement.child("users");
+        ressourcesRef = databaseTasksManagement.child("ressources");
+        ressourcesRef.addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        //clear previous user list
+                        ressourcesList.clear();
+                        //access to all user in database
+                        for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            //getting user
+                            Ressources ressource = postSnapshot.getValue(Ressources.class);
+                            //adding user to the list
+                            ressourcesList.add(ressource);
+                        }
+                    }
+
+                        @Override
+                        public void onCancelled (DatabaseError databaseError){
+                            //handle databaseError
+                        }
+                    }
+        );
         final ArrayList<String> list= new ArrayList<String>();
         final ListView taskList= (ListView) findViewById(R.id.taskList);
         tasksRef.addListenerForSingleValueEvent(
@@ -76,6 +107,28 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                 list.add(task.getName());
                             }
                         }
+                        if(!taskView.getSelectedItem().toString().equals("all users")) {
+                            User user = null;
+                            for(User u : LoginActivity.users) {
+                                if(u.getName().equals(taskView.getSelectedItem().toString())) {
+                                    user = u;
+                                }
+                            }
+                            for (Task task : listedTask) {
+                                if (!task.getAssignedUserId().equals(user.getUserId())) {
+                                    list.remove(task.getName());
+                                }
+                            }
+                        }
+                        if(!groupView.getSelectedItem().toString().equals("all groups")) {
+                            for (Task task : listedTask) {
+                                if (!task.getGroup().equals(groupView.getSelectedItem().toString())) {
+                                    System.out.println(groupView.getSelectedItem().toString()+"!!!!!!!!!!!!!!!!");
+                                    System.out.println(task.getGroup());
+                                    list.remove(task.getName());
+                                }
+                            }
+                        }
                         ArrayAdapter adapter = new ArrayAdapter(PrincipalActivity.this, android.R.layout.simple_list_item_1, list);
                         taskList.setAdapter(adapter);
                         taskList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -91,9 +144,6 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                         finish();
                                     }
                                 }
-                                //Task task = new Task(selectedTask.getTaskId(), selectedTask.getName(), selectedTask.getDetails(), selectedTask.getDueDate(), selectedTask.getIsRepeated());
-
-
                             }
 
                         });
@@ -155,6 +205,17 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             }
         });
 
+        Button refresh = (Button) findViewById(R.id.button2);
+        refresh.setOnClickListener(new View.OnClickListener(){
+            public void onClick (View v){
+                Intent myIntent = new Intent(PrincipalActivity.this, PrincipalActivity.class);
+                myIntent.putExtra("user",taskView.getSelectedItemPosition());
+                myIntent.putExtra("group",groupView.getSelectedItemPosition());
+                startActivity(myIntent);
+                finish();
+            }
+        });
+
 
     }
 
@@ -191,6 +252,11 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         groupView = (Spinner) findViewById(R.id.groupView);
         List<String> list = new ArrayList<String>();
         list.add("all groups");
+        list.add("Outdoor work");
+        list.add("Household");
+        list.add("Personnal");
+        list.add("Shopping");
+        list.add("Others");
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 
