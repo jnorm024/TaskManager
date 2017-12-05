@@ -98,12 +98,12 @@ public class ModifyTask extends AppCompatActivity {
             }
         });
 
-        Button mangeResButton= (Button) findViewById(R.id.manageRes);
-        mangeResButton.setOnClickListener(new View.OnClickListener() {
+        Button changeResButton= (Button) findViewById(R.id.changeRes);
+        changeResButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Task taskToViewRes = (Task) getIntent().getSerializableExtra("task");
-                Intent myIntent = new Intent(ModifyTask.this, ManageRessources.class);
+                Intent myIntent = new Intent(ModifyTask.this, New_Ressource.class);
                 myIntent.putExtra("task", taskToViewRes);
                 startActivity(myIntent);
                 finish();

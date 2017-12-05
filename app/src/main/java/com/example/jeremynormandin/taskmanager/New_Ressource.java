@@ -31,7 +31,7 @@ public class New_Ressource extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO créer la ressource avec les valeurs dans NameText et spinner groups
+                // TODO créer la ressource avec les valeurs dans NameText
             }
         });
 

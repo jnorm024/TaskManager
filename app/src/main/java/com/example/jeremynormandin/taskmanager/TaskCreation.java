@@ -80,8 +80,21 @@ public class TaskCreation extends AppCompatActivity {
 
             }
         });
+        Button addRessourcesButton= (Button) findViewById(R.id.addRessources);
+        addRessourcesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int input = addTask();
+                if (input == 0) {
+                    startActivity(new Intent(TaskCreation.this, New_Ressource.class));
+                    finish();
+                }
 
-        Button cancelButton= (Button) findViewById(R.id.cancelButton);
+            }
+        });
+
+
+                Button cancelButton= (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -67,7 +67,7 @@ public class ManageRessources extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Task taskToViewRes = (Task) getIntent().getSerializableExtra("task");
-                Intent myIntent = new Intent(ManageRessources.this, AddResToTask.class);
+                Intent myIntent = new Intent(ManageRessources.this, New_Ressource.class);
                 myIntent.putExtra("task", taskToViewRes);
                 startActivity(myIntent);
                 finish();

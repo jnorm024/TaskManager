@@ -34,34 +34,13 @@
         android:hint="Name "
         android:inputType="textPersonName" />
 
-    <Spinner
-        android:id="@+id/groups"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_alignEnd="@+id/nameText"
-        android:layout_alignRight="@+id/nameText"
-        android:layout_below="@+id/nameText"
-        android:layout_marginTop="25dp" />
-
-    <TextView
-        android:id="@+id/groupsView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/groups"
-        android:layout_alignLeft="@+id/nameView"
-        android:layout_alignStart="@+id/nameView"
-        android:layout_marginBottom="13dp"
-        android:text="Add a group :"
-        android:textColor="@color/colorAccent"
-        android:textSize="18sp" />
-
     <Button
         android:id="@+id/createButton"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/groups"
+        android:layout_below="@+id/nameText"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="129dp"
         android:background="@drawable/round_button"
         android:text="Create" />
 
