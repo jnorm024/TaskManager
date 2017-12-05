@@ -8,10 +8,12 @@ public class Ressources {
 
     private String name;
     private String relatedTaskId;
+    private String ressourceId;
 
-    public Ressources(String name, String groupName, String relatedTaskId) {
+    public Ressources(String name, String groupName, String relatedTaskId, String ressourceId) {
         this.name = name;
         this.relatedTaskId = relatedTaskId;
+        this.ressourceId = ressourceId;
     }
 
     public String getName(){
@@ -20,4 +22,5 @@ public class Ressources {
     public String getRelatedTaskId(){
         return this.relatedTaskId;
     }
+    public String getRessourceId() {return this.ressourceId;}
 }

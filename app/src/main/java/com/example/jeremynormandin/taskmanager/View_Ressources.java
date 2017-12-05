@@ -36,12 +36,12 @@ public class View_Ressources extends AppCompatActivity {
             }
         });
 
-
+        //TODO delete ces deux boutons useless!!!
         Button deleteButton= (Button) findViewById(R.id.deleteButton);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO implémenter delete ressource --JN
+
             }
         });
 
@@ -49,7 +49,7 @@ public class View_Ressources extends AppCompatActivity {
         refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO remplir la liste avec le group sélectionné dans le spinner --JN
+
             }
         });
 
