@@ -59,6 +59,7 @@ public class Settings extends AppCompatActivity {
                                 if(task.gethasReward()) {
                                     rewardsRef.child(task.getAssociatedRewardId()).removeValue();
                                 }
+                                //TODO même code que dans ModifyTask
                                 tasksRef.child(task.getTaskId()).removeValue();
                             }
                         }

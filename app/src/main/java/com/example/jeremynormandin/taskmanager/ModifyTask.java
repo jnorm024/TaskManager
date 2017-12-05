@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -26,6 +27,7 @@ public class ModifyTask extends AppCompatActivity {
 
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference tasksRef;
+    private DatabaseReference ressourcesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ModifyTask extends AppCompatActivity {
 
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
+        ressourcesRef = databaseTasksManagement.child("ressources");
 
         dueDate= taskToModify.getDueDate();
 
@@ -107,6 +110,24 @@ public class ModifyTask extends AppCompatActivity {
                 myIntent.putExtra("task", taskToViewRes);
                 startActivity(myIntent);
                 finish();
+            }
+        });
+
+        Button deleteRes= (Button) findViewById(R.id.delRes);
+        deleteRes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int j=0;
+                for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++){
+                    if(PrincipalActivity.ressourcesList.get(i).getRelatedTaskId().equals(taskToModify.getTaskId())) {
+                        ressourcesRef.child(PrincipalActivity.ressourcesList.get(i).getRessourceId()).removeValue();
+                        PrincipalActivity.ressourcesList.remove(PrincipalActivity.ressourcesList.get(i));
+                        Toast.makeText(ModifyTask.this, "The resource is removed", Toast.LENGTH_SHORT).show();
+                        j = 1;
+                    }
+                }
+                if(j==0){Toast.makeText(ModifyTask.this,"This task does not have any resources",Toast.LENGTH_SHORT).show(); }
+
             }
         });
 

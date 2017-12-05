@@ -24,11 +24,10 @@
                 android:id="@+id/reassignView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/usersSpin"
-                android:layout_marginEnd="15dp"
-                android:layout_marginRight="15dp"
-                android:layout_toLeftOf="@+id/usersSpin"
-                android:layout_toStartOf="@+id/usersSpin"
+                android:layout_alignLeft="@+id/reportDueDate"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/reportDueDate"
+                android:layout_marginTop="8dp"
                 android:text="Reassign to : "
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
@@ -39,7 +38,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/usersSpin"
+                android:layout_below="@+id/reassignView"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="17dp"
                 android:text="Report Task to : "
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
@@ -59,13 +61,10 @@
             <Spinner
                 android:id="@+id/usersSpin"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/descView"
-                android:layout_marginEnd="18dp"
-                android:layout_marginRight="18dp"
-                android:layout_marginTop="19dp" />
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/reassignView"
+                android:layout_toEndOf="@+id/monthText"
+                android:layout_toRightOf="@+id/monthText" />
 
             <TextView
                 android:id="@+id/monthText"
@@ -82,37 +81,35 @@
                 android:id="@+id/dayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/usersSpin"
-                android:layout_marginLeft="25dp"
-                android:layout_marginStart="25dp"
-                android:layout_marginTop="42dp"
+                android:layout_alignLeft="@+id/daySpinner"
+                android:layout_alignStart="@+id/daySpinner"
+                android:layout_below="@+id/reportDueDate"
+                android:layout_marginTop="27dp"
                 android:text="Day :"
                 android:textColor="@color/colorAccent"
                 android:textSize="16sp" />
 
             <Spinner
                 android:id="@+id/yearSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignTop="@+id/monthSpinner"
-                android:layout_marginEnd="12dp"
-                android:layout_marginRight="12dp" />
+                android:layout_alignEnd="@+id/usersSpin"
+                android:layout_alignRight="@+id/usersSpin"
+                android:layout_alignTop="@+id/monthSpinner" />
 
             <Spinner
                 android:id="@+id/daySpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_alignLeft="@+id/dayText"
-                android:layout_alignStart="@+id/dayText"
-                android:layout_below="@+id/dayText" />
+                android:layout_below="@+id/dayText"
+                android:layout_marginEnd="9dp"
+                android:layout_marginRight="9dp"
+                android:layout_toLeftOf="@+id/monthSpinner"
+                android:layout_toStartOf="@+id/monthSpinner" />
 
             <Spinner
                 android:id="@+id/monthSpinner"
-                android:layout_width="150dp"
+                android:layout_width="100dp"
                 android:layout_height="50dp"
                 android:layout_alignTop="@+id/daySpinner"
                 android:layout_centerHorizontal="true" />
@@ -121,11 +118,43 @@
                 android:id="@+id/changeRes"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
-                android:layout_below="@+id/monthSpinner"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="13dp"
+                android:layout_alignLeft="@+id/delRes"
+                android:layout_alignStart="@+id/delRes"
+                android:layout_below="@+id/yearSpinner"
+                android:layout_marginTop="33dp"
                 android:background="@drawable/round_button"
                 android:text="Change Ressource" />
+
+            <Button
+                android:id="@+id/delRes"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/changeRes"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/round_button"
+                android:text="Delete Ressource" />
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_alignLeft="@+id/daySpinner"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/daySpinner"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_button"
+                android:text="Cancel" />
+
+            <Button
+                android:id="@+id/applyChanges"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_alignEnd="@+id/yearSpinner"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/yearSpinner"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/round_button"
+                android:text="Apply Changes" />
 
         </RelativeLayout>
 
@@ -157,12 +186,10 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/desc"
             android:layout_alignParentTop="true"
-            android:layout_marginEnd="40dp"
-            android:layout_marginRight="40dp"
+            android:layout_alignStart="@+id/desc"
             android:layout_marginTop="14dp"
-            android:layout_toLeftOf="@+id/nameView"
-            android:layout_toStartOf="@+id/nameView"
             android:text="Name : "
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
@@ -173,33 +200,14 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/descView"
             android:layout_alignBottom="@+id/descView"
-            android:layout_alignEnd="@+id/name"
-            android:layout_alignRight="@+id/name"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:text="Description :"
             android:textColor="@color/colorAccent"
             android:textSize="18sp" />
     </RelativeLayout>
-
-
-    <Button
-        android:id="@+id/cancelButton"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="13dp"
-        android:background="@drawable/round_button"
-        android:text="Cancel" />
-
-    <Button
-        android:id="@+id/applyChanges"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_above="@+id/cancelButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp"
-        android:background="@drawable/round_button"
-        android:text="Apply Changes" />
 
 
 </RelativeLayout>

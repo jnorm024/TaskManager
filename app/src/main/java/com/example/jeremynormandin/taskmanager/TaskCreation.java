@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -77,27 +78,29 @@ public class TaskCreation extends AppCompatActivity {
         addRessourcesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder;
-                builder = new AlertDialog.Builder(TaskCreation.this);
-                builder.setTitle("Do you want to create a reward first");
-                builder.setMessage("If you click no you will not be able to crate a reward for this activity");
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        addTask();
-                        startActivity(new Intent(TaskCreation.this, createReward.class));
+                int input = addTask();
+                if(input==0) {
+                    AlertDialog.Builder builder;
+                    builder = new AlertDialog.Builder(TaskCreation.this);
+                    builder.setTitle("Do you want to create a reward first");
+                    builder.setMessage("If you click no you will not be able to crate a reward for this activity");
+                    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            addTask();
+                            startActivity(new Intent(TaskCreation.this, createReward.class));
 
-                    }
-                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-                        addTask();
-                        startActivity(new Intent(TaskCreation.this, New_Ressource.class));
-                    }
+                        }
+                    }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            addTask();
+                            startActivity(new Intent(TaskCreation.this, New_Ressource.class));
+                        }
 
-                });
-                builder.show();
-
+                    });
+                    builder.show();
+                }
             }
         });
         createTaskButton = (Button) findViewById(R.id.createTaskButton);
@@ -293,11 +296,13 @@ public class TaskCreation extends AppCompatActivity {
             tasksRef.child(id).setValue(newTask);
 
             //displaying a success toast
-            Toast.makeText(this, "Task created", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Task created", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             //if the value is not given displaying a toast
-            Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(this, "Invalid Inputs", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM|Gravity.CENTER, 0, 2);
+            toast.show();
             return -1;
         }
     }

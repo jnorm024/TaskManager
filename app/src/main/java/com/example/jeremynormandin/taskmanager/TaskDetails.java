@@ -21,6 +21,7 @@ public class TaskDetails extends AppCompatActivity {
     private DatabaseReference tasksRef;
     private DatabaseReference rewardsRef;
     private DatabaseReference usersRef;
+    private DatabaseReference ressourcesRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class TaskDetails extends AppCompatActivity {
         tasksRef = databaseTasksManagement.child("tasks");
         rewardsRef = databaseTasksManagement.child("rewards");
         usersRef = databaseTasksManagement.child("users");
+        ressourcesRef = databaseTasksManagement.child("ressources");
 
         TextView taskName = (TextView) findViewById(R.id.taskName);
         taskName.setText(selectedTask.getName());
@@ -108,6 +110,21 @@ public class TaskDetails extends AppCompatActivity {
                     tasksRef.child(selectedTask.getTaskId()).removeValue();
                     if(selectedTask.gethasReward()) {
                         rewardsRef.child(selectedTask.getAssociatedRewardId()).removeValue();
+                    }
+                    //HERE
+                    System.out.println("First: " + PrincipalActivity.ressourcesList.size());
+                    System.out.println(selectedTask.getHasRessource());
+                    //TODO there is a problem with setHasRessources somewhere else
+                    if(selectedTask.getHasRessource()){
+                        for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++){
+                            System.out.println("1: " + PrincipalActivity.ressourcesList.get(i).getRelatedTaskId());
+                            System.out.println("2: " + selectedTask.getTaskId());
+                            if(PrincipalActivity.ressourcesList.get(i).getRelatedTaskId().equals(selectedTask.getTaskId())) {
+                                ressourcesRef.child(PrincipalActivity.ressourcesList.get(i).getRessourceId()).removeValue();
+                                PrincipalActivity.ressourcesList.remove(PrincipalActivity.ressourcesList.get(i));
+                                System.out.println("second: "  + PrincipalActivity.ressourcesList.size());
+                            }
+                        }
                     }
                     PrincipalActivity.tasks.remove(selectedTask);
                     Toast.makeText(TaskDetails.this,"This task is removed",Toast.LENGTH_LONG).show();

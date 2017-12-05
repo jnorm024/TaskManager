@@ -26,40 +26,30 @@
             android:text="view tasks for" />
 
         <Spinner
-            android:id="@+id/groupView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/viewText"
-            android:layout_toRightOf="@+id/viewText" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/groupView"
-            android:layout_toEndOf="@+id/groupView"
-            android:layout_toRightOf="@+id/groupView" />
-
-        <Spinner
             android:id="@+id/taskView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_toLeftOf="@+id/button2"
-            android:layout_toStartOf="@+id/button2" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:background="@drawable/round_button"
             android:text="√" />
+
+        <Spinner
+            android:id="@+id/groupView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@+id/button2"
+            android:layout_toStartOf="@+id/button2" />
 
     </RelativeLayout>
 

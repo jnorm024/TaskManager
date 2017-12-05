@@ -68,14 +68,21 @@ public class New_Ressource extends AppCompatActivity {
             String ressourceId = ressourcesRef.push().getKey();
             String groupName = TaskCreation.lastTaskCreated.getGroup();
             String relatedTaskId = TaskCreation.lastTaskCreated.getTaskId();
+            for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++) {
+                if (PrincipalActivity.ressourcesList.get(i).getRelatedTaskId() == TaskCreation.lastTaskCreated.getTaskId()) {
+                    ressourcesRef.child(PrincipalActivity.ressourcesList.get(i).getRessourceId()).removeValue();
+                    PrincipalActivity.ressourcesList.remove(PrincipalActivity.ressourcesList.get(i));
+                }
+            }
             //creating a new Ressources Object
             Ressources newRessource =  new Ressources( name, groupName, relatedTaskId, ressourceId);
 
             PrincipalActivity.ressourcesList.add(newRessource);
             ressourcesRef.child(ressourceId).setValue(newRessource);
-
+            //TODO does not work
+            TaskCreation.lastTaskCreated.setHasRessource(true);
             //displaying a success toast
-            Toast.makeText(this, "ressource added", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "resource added", Toast.LENGTH_LONG).show();
             return 0;
         } else {
             //if the value is not given displaying a toast

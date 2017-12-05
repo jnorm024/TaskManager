@@ -12,6 +12,7 @@ public class Task implements Serializable {
     private String details;
     private boolean isAssigned = false;
     private boolean hasReward = false;
+    private boolean hasRessource = false;
     private String dueDate;
     private boolean isAccomplished = false;
     private boolean isRepeated;
@@ -55,6 +56,7 @@ public class Task implements Serializable {
     public String getAssignedUserId() {return this.assignedUserId;}
     public String getAssociatedRewardId() {return this.associatedRewardId;}
     public boolean gethasReward() {return this.hasReward;}
+    public boolean getHasRessource() {return hasRessource;}
 
     public void setAssignedUserId(String id) {
         isAssigned = true;
@@ -82,6 +84,8 @@ public class Task implements Serializable {
     }
 
     public String getGroup() { return this.group; }
+
+    public void setHasRessource(boolean hasRessource) {this.hasRessource = hasRessource;}
 }
 
 
