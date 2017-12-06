@@ -85,7 +85,7 @@ public class Task implements Serializable {
 
     public String getGroup() { return this.group; }
 
-    public void setHasRessource(boolean hasRessource) {this.hasRessource = hasRessource;}
+    public void setHasRessource() {hasRessource=true;}
 }
 
 

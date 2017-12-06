@@ -54,7 +54,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
             taskView.setSelection(spinnerUser);
             groupView.setSelection(spinnerGroup);
         }
-        //TODO this create a new list everytime we open the App therefore kinda clears it
+
         ressourcesList = new ArrayList<>();
         tasks = new ArrayList<>();
         final ArrayList<Task> listedTask = new ArrayList<>();

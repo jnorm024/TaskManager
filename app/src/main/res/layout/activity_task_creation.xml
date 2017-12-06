@@ -39,12 +39,11 @@
             android:id="@+id/daySpinner"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_below="@+id/points"
-            android:layout_marginEnd="11dp"
-            android:layout_marginRight="11dp"
-            android:layout_marginTop="132dp"
-            android:layout_toLeftOf="@+id/points"
-            android:layout_toStartOf="@+id/points" />
+            android:layout_below="@+id/dayText"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_toLeftOf="@+id/monthSpinner"
+            android:layout_toStartOf="@+id/monthSpinner" />
 
         <Spinner
             android:id="@+id/yearSpinner"
@@ -61,8 +60,10 @@
             android:layout_width="99dp"
             android:layout_height="47dp"
             android:layout_above="@+id/dueDateID"
-            android:layout_alignLeft="@+id/dueDateID"
-            android:layout_alignStart="@+id/dueDateID"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_toLeftOf="@+id/groupSpinner"
+            android:layout_toStartOf="@+id/groupSpinner"
             android:text="AssignedTo"
             android:textAlignment="center"
             android:textSize="18sp"
@@ -94,8 +95,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/monthSpinner"
-            android:layout_alignLeft="@+id/daySpinner"
-            android:layout_alignStart="@+id/daySpinner"
+            android:layout_alignLeft="@+id/dueDateID"
+            android:layout_alignStart="@+id/dueDateID"
             android:text="Day :"
             android:textSize="16sp" />
 
@@ -139,8 +140,8 @@
             android:layout_width="170dp"
             android:layout_height="28dp"
             android:layout_above="@+id/dayText"
-            android:layout_alignLeft="@+id/dayText"
-            android:layout_alignStart="@+id/dayText"
+            android:layout_alignLeft="@+id/groupSelection"
+            android:layout_alignStart="@+id/groupSelection"
             android:text="Due date :"
             android:textAlignment="gravity"
             android:textSize="18sp"
@@ -151,10 +152,9 @@
             android:id="@+id/groupSelection"
             android:layout_width="wrap_content"
             android:layout_height="47dp"
-            android:layout_alignLeft="@+id/assignedToText"
-            android:layout_alignStart="@+id/assignedToText"
-            android:layout_below="@+id/points"
-            android:layout_marginTop="13dp"
+            android:layout_alignTop="@+id/groupSpinner"
+            android:layout_toLeftOf="@+id/groupSpinner"
+            android:layout_toStartOf="@+id/groupSpinner"
             android:text="related group :"
             android:textSize="18sp" />
 

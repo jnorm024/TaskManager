@@ -12,8 +12,8 @@
         android:layout_height="250dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/dueDate"
-        android:layout_marginTop="36dp">
+        android:layout_below="@+id/groupView"
+        android:layout_marginTop="39dp">
 
         <Button
             android:id="@+id/setAsCompleted"
@@ -51,7 +51,7 @@
     <TextView
         android:id="@+id/taskDetails"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_alignLeft="@+id/taskName"
         android:layout_alignStart="@+id/taskName"
         android:layout_below="@+id/taskName"
@@ -63,10 +63,10 @@
     <TextView
         android:id="@+id/taskName"
         android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/cancelButton"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/nameView"
+        android:layout_alignBottom="@+id/nameView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
         android:text="Task Name"
         android:textAlignment="center"
         android:textSize="18sp" />
@@ -74,7 +74,7 @@
     <TextView
         android:id="@+id/assignedTo"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/taskDetails"
         android:layout_centerHorizontal="true"
         android:text="Assigned TO"
@@ -83,7 +83,7 @@
     <TextView
         android:id="@+id/dueDate"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_below="@+id/assignedTo"
         android:layout_centerHorizontal="true"
         android:text="Due Date"
@@ -93,11 +93,10 @@
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/taskName"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_alignLeft="@+id/cancelButton"
+        android:layout_alignStart="@+id/cancelButton"
+        android:layout_below="@+id/cancelButton"
+        android:layout_marginTop="15dp"
         android:text="Name :"
         android:textColor="@color/colorAccent"
         android:textSize="18sp" />
@@ -146,5 +145,66 @@
         android:layout_toStartOf="@+id/taskName"
         android:background="@drawable/round_button"
         android:text="Back" />
+
+    <TextView
+        android:id="@+id/resView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dueDateView"
+        android:layout_alignStart="@+id/dueDateView"
+        android:layout_below="@+id/dueDate"
+        android:text="Ressource : "
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ressourceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dueDate"
+        android:layout_centerHorizontal="true"
+        android:text="Ressource"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/groupView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/resView"
+        android:layout_alignStart="@+id/resView"
+        android:layout_below="@+id/resView"
+        android:layout_marginTop="14dp"
+        android:text="Group : "
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/groupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/groupView"
+        android:layout_centerHorizontal="true"
+        android:text="TextView"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ptsText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/groupText"
+        android:layout_centerHorizontal="true"
+        android:text="pts"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/ptsView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/detailsView"
+        android:layout_alignRight="@+id/detailsView"
+        android:layout_below="@+id/groupView"
+        android:text="Points : "
+        android:textColor="@color/colorAccent"
+        android:textSize="18sp" />
 
 </RelativeLayout>

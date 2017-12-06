@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import static com.example.jeremynormandin.taskmanager.R.layout.activity_task_details;
 
 public class TaskDetails extends AppCompatActivity {
@@ -42,8 +44,25 @@ public class TaskDetails extends AppCompatActivity {
         taskDetails.setText(selectedTask.getDetails());
 
         TextView assignedTo = (TextView) findViewById(R.id.assignedTo);
-        //System.out.println(selectedTask.getAssignedUserId()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-       // System.out.println(selectedTask.getIsAssigned());
+
+        TextView taskRes= (TextView) findViewById(R.id.ressourceText);
+        for(Ressources r : PrincipalActivity.ressourcesList) {
+            if(r.getRelatedTaskId().equals(selectedTask.getTaskId())) {
+                taskRes.setText(r.getName());
+            }
+            else{
+                taskRes.setText("Nothing assigned");
+            }
+        }
+
+        TextView ptsText= (TextView) findViewById(R.id.ptsText);
+        ptsText.setText(Integer.toString(selectedTask.getPoints()));
+
+        TextView assignedGroup= (TextView) findViewById(R.id.groupText);
+        assignedGroup.setText(selectedTask.getGroup());
+
+
+
         if(!selectedTask.getIsAssigned()) {
              assignedTo.setText("Bonus");
         } else {
