@@ -67,9 +67,7 @@ public class TaskDetails extends AppCompatActivity {
              assignedTo.setText("Bonus");
         } else {
             for(User user : LoginActivity.users) {
-               // System.out.println(selectedTask.getAssignedUserId()+" vs "+user.getUserId());
                 if(selectedTask.getAssignedUserId().equals(user.getUserId())) {
-                //    System.out.println(user.getName()+" user name found !!!!!!!!!!!!!!!!!!");
                     assignedTo.setText(user.getName());
                 }
             }
@@ -130,21 +128,15 @@ public class TaskDetails extends AppCompatActivity {
                     if(selectedTask.gethasReward()) {
                         rewardsRef.child(selectedTask.getAssociatedRewardId()).removeValue();
                     }
-                    //HERE
-                    System.out.println("First: " + PrincipalActivity.ressourcesList.size());
-                    System.out.println(selectedTask.getHasRessource());
-                    //TODO there is a problem with setHasRessources somewhere else
-                    if(selectedTask.getHasRessource()){
-                        for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++){
-                            System.out.println("1: " + PrincipalActivity.ressourcesList.get(i).getRelatedTaskId());
-                            System.out.println("2: " + selectedTask.getTaskId());
-                            if(PrincipalActivity.ressourcesList.get(i).getRelatedTaskId().equals(selectedTask.getTaskId())) {
-                                ressourcesRef.child(PrincipalActivity.ressourcesList.get(i).getRessourceId()).removeValue();
-                                PrincipalActivity.ressourcesList.remove(PrincipalActivity.ressourcesList.get(i));
-                                System.out.println("second: "  + PrincipalActivity.ressourcesList.size());
-                            }
+                    //search for a a ressource related to this task and remove it if there is one
+                    for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++){
+                        if(PrincipalActivity.ressourcesList.get(i).getRelatedTaskId().equals(selectedTask.getTaskId())) {
+                            ressourcesRef.child(PrincipalActivity.ressourcesList.get(i).getRessourceId()).removeValue();
+                            PrincipalActivity.ressourcesList.remove(PrincipalActivity.ressourcesList.get(i));
+                            break;
                         }
                     }
+
                     PrincipalActivity.tasks.remove(selectedTask);
                     Toast.makeText(TaskDetails.this,"This task is removed",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));

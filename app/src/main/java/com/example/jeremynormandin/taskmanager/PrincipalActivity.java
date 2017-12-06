@@ -21,20 +21,23 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This activity represent the schedule in the class diagram
+ * It shows all tasks depending on the user or group selected
+ */
 public class PrincipalActivity extends AppCompatActivity implements Serializable  {
 
-    //TextView nameView;
     Spinner taskView;
     Spinner groupView;
     /**
-     * ici je fais appelle à ma base de donnée pour les tâches
+     * ici je fais appelle à ma base de données pour les tâches
      */
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference tasksRef;
     private DatabaseReference ressourcesRef;
     private DatabaseReference usersRef;
     /**
-     * Ces deux valeurs static permettent d'accéder à l'utilisateur
+     * Ces attributs statiques permettent d'accéder à l'utilisateur
      * actuellement connecté et à la liste de toutes les tâches à partir de n'importe lequel autre activité
      */
     private static User loginUser;
@@ -48,6 +51,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         getSupportActionBar().setTitle("Home - "+ loginUser.getName());
         setTaskViewSpinner();
         setGroupViewSpinner();
+        //if a group or user was selected in the spinner before lauching activity, set the spinner with the selection
         if(getIntent().hasExtra("group") && getIntent().hasExtra("user")) {
             final Integer spinnerGroup = (Integer) getIntent().getSerializableExtra("group");
             final Integer spinnerUser = (Integer) getIntent().getSerializableExtra("user");
@@ -57,7 +61,9 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
 
         ressourcesList = new ArrayList<>();
         tasks = new ArrayList<>();
+        //this list the task to be show in the UI list
         final ArrayList<Task> listedTask = new ArrayList<>();
+        //instantiate the database
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
         usersRef = databaseTasksManagement.child("users");
@@ -66,13 +72,13 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        //clear previous user list
+                        //clear previous ressources list
                         ressourcesList.clear();
-                        //access to all user in database
+                        //access to all ressources in database
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            //getting user
+                            //getting ressource
                             Ressources ressource = postSnapshot.getValue(Ressources.class);
-                            //adding user to the list
+                            //adding ressource to the list
                             ressourcesList.add(ressource);
                         }
                     }
@@ -103,6 +109,7 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                                 list.add(task.getName());
                             }
                         }
+                        //if a specific user or group is selected, remove all tasks not related to it from the list to be shown
                         if(!taskView.getSelectedItem().toString().equals("all users")) {
                             User user = null;
                             for(User u : LoginActivity.users) {
@@ -151,8 +158,6 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
                         //handle databaseError
                     }
                 });
-        //nameView = (TextView) findViewById(R.id.nameView);
-       // nameView.setText(loginUser.getName());
 
         Button newTask = (Button) findViewById(R.id.addNewTask);
         newTask.setOnClickListener(new View.OnClickListener(){
@@ -230,6 +235,9 @@ public class PrincipalActivity extends AppCompatActivity implements Serializable
         return loginUser;
     }
 
+    /**
+     * Set the spinner with all username
+     */
     private void setTaskViewSpinner() {
         taskView = (Spinner) findViewById(R.id.taskView);
         List<String> list = new ArrayList<String>();

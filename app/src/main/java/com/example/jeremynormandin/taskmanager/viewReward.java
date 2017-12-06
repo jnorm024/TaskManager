@@ -51,19 +51,18 @@ public class viewReward extends AppCompatActivity {
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        //clear previous user list
+                        //clear previous reward list
                         rewards.clear();
-                        //access to all user in database
+                        //access to all rewards in database
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            //getting user
+                            //getting reward
                             Reward reward =  postSnapshot.getValue(Reward.class);
-                            //adding user to the list
+                            //adding reward to the list
                             rewards.put(reward.getRewardId(), reward);
                         }
 
                         User selectedUser = getSelectedUser();
                         final ArrayList<Reward> userRewards = getRewardsList(selectedUser);
-
 
                         for (Reward reward : userRewards){
                             if(reward!=null) {
@@ -72,6 +71,7 @@ public class viewReward extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter(viewReward.this, android.R.layout.simple_list_item_1, list);
                         rewardList.setAdapter(adapter);
+                        //this method finds the selected reward in the list and start the activity with it
                         rewardList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
                             public void onItemClick(AdapterView<?> list, View v, int pos, long id){
                                 for(Reward reward : userRewards) {
@@ -94,9 +94,7 @@ public class viewReward extends AppCompatActivity {
                     }
                 });
 
-
-
-
+        //the refresh button restart the activity with the new selected user from the spinner
         refresh = (Button) findViewById(R.id.refreshButton);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +127,6 @@ public class viewReward extends AppCompatActivity {
 
             for (User user : LoginActivity.users) {
                 list.add(user.getName());
-                System.out.println(user.getName());
             }
         }
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
@@ -138,6 +135,11 @@ public class viewReward extends AppCompatActivity {
 
         viewRewardFor.setAdapter(dataAdapter);
     }
+
+    /**
+     * this method get the user object from the selected username in the spinner
+     * @return
+     */
     private User getSelectedUser() {
         for(User user : LoginActivity.users) {
             if(user.getName().equals(viewRewardFor.getSelectedItem().toString())) {
@@ -148,14 +150,21 @@ public class viewReward extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * gets all rewards related to the selected user
+     * @param user
+     * @return
+     */
     private ArrayList<Reward> getRewardsList(User user) {
         ArrayList<Task> userRewardedTasks = new ArrayList<>();
+        //finds all accomplished task related with the user
         for(Task task : PrincipalActivity.tasks) {
             if(user.getUserId().equals(task.getAssignedUserId()) && task.getAssociatedRewardId()!= null && task.getIsAccomplished()) {
                 userRewardedTasks.add(task);
             }
         }
         ArrayList<Reward> userRewards = new ArrayList<>();
+        //if those tasks have a reward it adds the reward to the list of the user rewards
         for(Task task : userRewardedTasks) {
             userRewards.add(rewards.get(task.getAssociatedRewardId()));
         }

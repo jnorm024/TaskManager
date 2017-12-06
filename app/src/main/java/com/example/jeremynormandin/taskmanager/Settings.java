@@ -21,8 +21,6 @@ public class Settings extends AppCompatActivity {
     private DatabaseReference rewardsRef;
     private DatabaseReference ressourcesRef;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +41,6 @@ public class Settings extends AppCompatActivity {
                 //Il faut une confirmation first pour éviter les suppressions sans le vouloir
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(Settings.this);
-                builder = new AlertDialog.Builder(Settings.this);
                 builder.setTitle("You are about to delete this user.");
                 builder.setMessage("Press OK to proceed");
 
@@ -55,9 +52,9 @@ public class Settings extends AppCompatActivity {
                         rewardsRef = databaseTasksManagement.child("rewards");
                         usersRef = databaseTasksManagement.child("users");
                         ressourcesRef = databaseTasksManagement.child("ressources");
+                        //remove all tasks, rewards and ressources linked with the user before removing the user from database
                         for(Task task : PrincipalActivity.tasks) {
                             if(PrincipalActivity.getLoginUser().getUserId().equals(task.getAssignedUserId())) {
-                                System.out.println("has a task !!!!!!!!!!!!"+task.getName());
                                 if(task.gethasReward()) {
                                     rewardsRef.child(task.getAssociatedRewardId()).removeValue();
                                 }
@@ -66,20 +63,16 @@ public class Settings extends AppCompatActivity {
                                         ressourcesRef.child(r.getRessourceId()).removeValue();
                                     }
                                 }
-                                //TODO même code que dans ModifyTask
                                 tasksRef.child(task.getTaskId()).removeValue();
                             }
                         }
 
-
                         usersRef.child(PrincipalActivity.getLoginUser().getUserId()).removeValue();
                         LoginActivity.users.remove(PrincipalActivity.getLoginUser());
 
-                        //Toast.makeText(TaskDetails.this,"This task is removed",Toast.LENGTH_LONG).show();
-                        //startActivity(new Intent(TaskDetails.this, PrincipalActivity.class));
-                        //finish();
                         startActivity(new Intent(Settings.this, LoginActivity.class));
                         Toast.makeText(Settings.this,"User removed",Toast.LENGTH_LONG).show();
+                        finish();
 
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

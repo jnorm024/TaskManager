@@ -25,7 +25,7 @@ public class TaskCreation extends AppCompatActivity {
 
     /**
      * Cette tâche statique me permet de sauvegarder la derniere tâche créée de manière
-     * à ce que je puisse il accéder pour ajouter une récompense dans createReward
+     * à ce que je puisse y accéder pour ajouter une récompense dans createReward et new_ressource
      */
     static Task lastTaskCreated;
 
@@ -62,7 +62,6 @@ public class TaskCreation extends AppCompatActivity {
         repetitive = (CheckBox) findViewById(R.id.repetitiveTask);
         groupsSpinner = (Spinner) findViewById(R.id.groupSpinner);
 
-        //TODO (DONE) ajouter le groupe sélectionné à la tâche
         addRewardButton = (Button) findViewById(R.id.addRewardButton);
         addRewardButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
