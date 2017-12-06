@@ -105,9 +105,9 @@ public class ModifyTask extends AppCompatActivity {
         changeResButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Task taskToViewRes = (Task) getIntent().getSerializableExtra("task");
+                //Task taskToViewRes = (Task) getIntent().getSerializableExtra("task");
                 Intent myIntent = new Intent(ModifyTask.this, New_Ressource.class);
-                myIntent.putExtra("task", taskToViewRes);
+                myIntent.putExtra("task", taskToModify);
                 startActivity(myIntent);
                 finish();
             }

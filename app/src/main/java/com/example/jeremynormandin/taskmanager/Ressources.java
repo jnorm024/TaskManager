@@ -12,7 +12,7 @@ public class Ressources {
 
     public Ressources() {}
 
-    public Ressources(String name, String groupName, String relatedTaskId, String ressourceId) {
+    public Ressources(String name, String relatedTaskId, String ressourceId) {
         this.name = name;
         this.relatedTaskId = relatedTaskId;
         this.ressourceId = ressourceId;

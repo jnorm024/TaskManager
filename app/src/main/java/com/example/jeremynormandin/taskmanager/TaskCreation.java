@@ -260,7 +260,7 @@ public class TaskCreation extends AppCompatActivity {
         try {
             taskPoints = Integer.parseInt(points.getText().toString().trim());
         } catch(Exception e) {
-            Toast.makeText(this, "Invalid input at points, write a number!", Toast.LENGTH_LONG).show();
+            System.out.println("invalid input at points editText !");
         }
 
         //checking if the value is provided

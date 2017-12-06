@@ -28,6 +28,10 @@ public class New_Ressource extends AppCompatActivity {
         setContentView(R.layout.activity_new__ressource);
         getSupportActionBar().setTitle("Create a new ressource");
 
+        if(getIntent().hasExtra("task")) {
+            TaskCreation.lastTaskCreated = (Task) getIntent().getSerializableExtra("task");
+        }
+
         Button cancelButton= (Button) findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,13 +39,11 @@ public class New_Ressource extends AppCompatActivity {
                 startActivity(new Intent(New_Ressource.this, PrincipalActivity.class));
             }
         });
-        //TODO (DONE) faire une reference à la database de ressources et ajouter tous les ressources à une liste static de ressources à chaque changement
 
         Button createButton= (Button) findViewById(R.id.createButton);
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO (DONE) créer la ressource avec les valeurs dans NameText
                 int input = addRessource();
                 if(input==0) {
                     startActivity(new Intent(New_Ressource.this, PrincipalActivity.class));
@@ -66,7 +68,6 @@ public class New_Ressource extends AppCompatActivity {
             //getting a unique id using push().getKey() method
             //it will create a unique id and we will use it as the Primary Key for our Ressources
             String ressourceId = ressourcesRef.push().getKey();
-            String groupName = TaskCreation.lastTaskCreated.getGroup();
             String relatedTaskId = TaskCreation.lastTaskCreated.getTaskId();
             for(int i=0; i<PrincipalActivity.ressourcesList.size(); i++) {
                 if (PrincipalActivity.ressourcesList.get(i).getRelatedTaskId() == TaskCreation.lastTaskCreated.getTaskId()) {
@@ -75,7 +76,7 @@ public class New_Ressource extends AppCompatActivity {
                 }
             }
             //creating a new Ressources Object
-            Ressources newRessource =  new Ressources( name, groupName, relatedTaskId, ressourceId);
+            Ressources newRessource =  new Ressources( name, relatedTaskId, ressourceId);
 
             PrincipalActivity.ressourcesList.add(newRessource);
             ressourcesRef.child(ressourceId).setValue(newRessource);

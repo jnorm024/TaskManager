@@ -19,6 +19,7 @@ public class Settings extends AppCompatActivity {
     private DatabaseReference usersRef;
     private DatabaseReference tasksRef;
     private DatabaseReference rewardsRef;
+    private DatabaseReference ressourcesRef;
 
 
 
@@ -53,16 +54,23 @@ public class Settings extends AppCompatActivity {
                         tasksRef = databaseTasksManagement.child("tasks");
                         rewardsRef = databaseTasksManagement.child("rewards");
                         usersRef = databaseTasksManagement.child("users");
+                        ressourcesRef = databaseTasksManagement.child("ressources");
                         for(Task task : PrincipalActivity.tasks) {
                             if(PrincipalActivity.getLoginUser().getUserId().equals(task.getAssignedUserId())) {
                                 System.out.println("has a task !!!!!!!!!!!!"+task.getName());
                                 if(task.gethasReward()) {
                                     rewardsRef.child(task.getAssociatedRewardId()).removeValue();
                                 }
+                                for(Ressources r : PrincipalActivity.ressourcesList) {
+                                    if(r.getRelatedTaskId().equals(task.getTaskId())) {
+                                        ressourcesRef.child(r.getRessourceId()).removeValue();
+                                    }
+                                }
                                 //TODO même code que dans ModifyTask
                                 tasksRef.child(task.getTaskId()).removeValue();
                             }
                         }
+
 
                         usersRef.child(PrincipalActivity.getLoginUser().getUserId()).removeValue();
                         LoginActivity.users.remove(PrincipalActivity.getLoginUser());
