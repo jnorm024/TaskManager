@@ -26,7 +26,7 @@
         <activity android:name=".viewReward" />
         <activity android:name=".TaskCreation" />
         <activity android:name=".NewUser" />
-        <activity android:name=".createReward" />
+        <activity android:name=".CreateReward" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".giveRewards" />
@@ -36,8 +36,6 @@
         <activity android:name=".New_Ressource" />
         <activity android:name=".ViewScore" />
         <activity android:name=".ModifyTask" />
-        <activity android:name=".ManageRessources" />
-        <activity android:name=".AddResToTask"></activity>
     </application>
 
 </manifest>

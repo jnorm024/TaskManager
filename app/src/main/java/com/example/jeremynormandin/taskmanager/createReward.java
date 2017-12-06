@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class createReward extends AppCompatActivity {
+public class CreateReward extends AppCompatActivity {
 
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference rewardsRef;
@@ -24,14 +24,12 @@ public class createReward extends AppCompatActivity {
     EditText descriptionText;
     Button buttonAddReward;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_reward);
         getSupportActionBar().setTitle("Create reward");
-
+        //instatiate references to the database
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         rewardsRef = databaseTasksManagement.child("rewards");
         tasksRef = databaseTasksManagement.child("tasks");
@@ -43,24 +41,24 @@ public class createReward extends AppCompatActivity {
         buttonAddReward.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //popup giving the choice between adding a reward of cancelling the creation
                 AlertDialog.Builder builder;
-                builder = new AlertDialog.Builder(createReward.this);
-                builder = new AlertDialog.Builder(createReward.this);
+                builder = new AlertDialog.Builder(CreateReward.this);
+                builder = new AlertDialog.Builder(CreateReward.this);
                 builder.setTitle("Do you want to add a ressource");
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         addReward();
-                        startActivity(new Intent(createReward.this, New_Ressource.class));
+                        startActivity(new Intent(CreateReward.this, New_Ressource.class));
 
                     }
                 }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         addReward();
-                        startActivity(new Intent(createReward.this, PrincipalActivity.class));
+                        startActivity(new Intent(CreateReward.this, PrincipalActivity.class));
                     }
 
                 });
@@ -73,7 +71,7 @@ public class createReward extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(createReward.this, TaskCreation.class));
+                startActivity(new Intent(CreateReward.this, TaskCreation.class));
             }
         });
 
@@ -86,6 +84,9 @@ public class createReward extends AppCompatActivity {
         // do nothing. We want to force user to stay in this activity and not drop out.
     }
 
+    /**
+     * This method add the reward to the database if the inputs are valid
+     */
     private void addReward() {
         String rewardName = nameText.getText().toString().trim();
         String rewardDescription = descriptionText.getText().toString();

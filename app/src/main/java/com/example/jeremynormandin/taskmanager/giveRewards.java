@@ -27,11 +27,11 @@ public class giveRewards extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_give_rewards);
         getSupportActionBar().setTitle("Give a reward");
-
+        //Instantiate the database
         databaseTasksManagement = FirebaseDatabase.getInstance().getReferenceFromUrl("https://taskmanager-47695.firebaseio.com/");
         tasksRef = databaseTasksManagement.child("tasks");
         rewardsRef = databaseTasksManagement.child("rewards");
-
+        //getting the reward selected in the reward list from viewReward
         final Reward reward = (Reward) getIntent().getSerializableExtra("reward");
 
         rewardName = (TextView) findViewById(R.id.rewardName);
@@ -43,8 +43,11 @@ public class giveRewards extends AppCompatActivity {
         giveButton = (Button) findViewById(R.id.giveButton);
         giveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                //This loop search for the task associated with this reward
                 for(Task task : PrincipalActivity.tasks) {
                     if(reward.getRewardId().equals(task.getAssociatedRewardId())) {
+                        //Once the task is found, the reward is removed
+                        // the task is reset if it is repetitive and deleted otherwise
                         if(!task.getIsRepeated()) {
                             tasksRef.child(task.getTaskId()).removeValue();
                             rewardsRef.child(reward.getRewardId()).removeValue();

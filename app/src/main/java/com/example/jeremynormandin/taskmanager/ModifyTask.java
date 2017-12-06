@@ -61,7 +61,7 @@ public class ModifyTask extends AppCompatActivity {
         applyChanges.setOnClickListener(new View.OnClickListener(){
            @Override
             public void onClick (View v){
-
+                //find the task to modify in task list and replace it with the modifications applied
                for (Task task : PrincipalActivity.tasks){
                    if(taskToModify.getTaskId().equals(task.getTaskId())){
                        PrincipalActivity.tasks.remove(task);
@@ -69,11 +69,11 @@ public class ModifyTask extends AppCompatActivity {
                        task.setDueDate(yearSpinner.getSelectedItem().toString(),monthSpinner.getSelectedItem().toString(),daySpinner.getSelectedItem().toString());
                        for(User user: LoginActivity.users){
                            if(assignedTo.getSelectedItem().toString().equals("bonus")){
+                               task.setAssignedUserId(null);
                                task.setIsUnassigned();
                            }
 
                            if(assignedTo.getSelectedItem().toString().equals(user.getName())){
-
                                task.setAssignedUserId(user.getUserId());
                            }
                        }
@@ -105,7 +105,6 @@ public class ModifyTask extends AppCompatActivity {
         changeResButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Task taskToViewRes = (Task) getIntent().getSerializableExtra("task");
                 Intent myIntent = new Intent(ModifyTask.this, New_Ressource.class);
                 myIntent.putExtra("task", taskToModify);
                 startActivity(myIntent);
@@ -140,20 +139,17 @@ public class ModifyTask extends AppCompatActivity {
         // do nothing. We want to force user to stay in this activity and not drop out.
     }
 
-
+    /**
+     * add all users to the users spinner
+     */
     public void assignToUser() {
         assignedTo = (Spinner) findViewById(R.id.usersSpin);
         List<String> list = new ArrayList<String>();
         list.add("bonus");
 
-
-            for (User user : LoginActivity.users) {
+        for (User user : LoginActivity.users) {
                 list.add(user.getName());
-                //System.out.println(user.getName());
-            }
-            for (String userName : list) {
-                System.out.println(userName);
-            }
+        }
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
 
