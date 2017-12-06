@@ -26,7 +26,7 @@
         <activity android:name=".viewReward" />
         <activity android:name=".TaskCreation" />
         <activity android:name=".NewUser" />
-        <activity android:name=".CreateReward" />
+        <activity android:name=".createReward" />
         <activity android:name=".PrincipalActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".giveRewards" />

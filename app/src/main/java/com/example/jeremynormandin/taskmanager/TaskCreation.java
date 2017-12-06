@@ -25,7 +25,7 @@ public class TaskCreation extends AppCompatActivity {
 
     /**
      * Cette tâche statique me permet de sauvegarder la derniere tâche créée de manière
-     * à ce que je puisse il accéder pour ajouter une récompense dans CreateReward
+     * à ce que je puisse il accéder pour ajouter une récompense dans createReward
      */
     static Task lastTaskCreated;
 
@@ -68,7 +68,7 @@ public class TaskCreation extends AppCompatActivity {
             public void onClick(View v) {
                 int input = addTask();
                 if(input==0) {
-                    startActivity(new Intent(TaskCreation.this, CreateReward.class));
+                    startActivity(new Intent(TaskCreation.this, createReward.class));
                     finish();
                 }
 
@@ -88,7 +88,7 @@ public class TaskCreation extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int id) {
                             addTask();
-                            startActivity(new Intent(TaskCreation.this, CreateReward.class));
+                            startActivity(new Intent(TaskCreation.this, createReward.class));
 
                         }
                     }).setNegativeButton("NO", new DialogInterface.OnClickListener() {

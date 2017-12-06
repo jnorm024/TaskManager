@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class CreateReward extends AppCompatActivity {
+public class createReward extends AppCompatActivity {
 
     private DatabaseReference databaseTasksManagement;
     private DatabaseReference rewardsRef;
@@ -43,22 +43,22 @@ public class CreateReward extends AppCompatActivity {
             public void onClick(View view) {
                 //popup giving the choice between adding a reward of cancelling the creation
                 AlertDialog.Builder builder;
-                builder = new AlertDialog.Builder(CreateReward.this);
-                builder = new AlertDialog.Builder(CreateReward.this);
+                builder = new AlertDialog.Builder(createReward.this);
+                builder = new AlertDialog.Builder(createReward.this);
                 builder.setTitle("Do you want to add a ressource");
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         addReward();
-                        startActivity(new Intent(CreateReward.this, New_Ressource.class));
+                        startActivity(new Intent(createReward.this, New_Ressource.class));
 
                     }
                 }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         addReward();
-                        startActivity(new Intent(CreateReward.this, PrincipalActivity.class));
+                        startActivity(new Intent(createReward.this, PrincipalActivity.class));
                     }
 
                 });
@@ -71,7 +71,7 @@ public class CreateReward extends AppCompatActivity {
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CreateReward.this, TaskCreation.class));
+                startActivity(new Intent(createReward.this, TaskCreation.class));
             }
         });
 
