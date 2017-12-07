@@ -80,8 +80,6 @@ public class New_Ressource extends AppCompatActivity {
 
             PrincipalActivity.ressourcesList.add(newRessource);
             ressourcesRef.child(ressourceId).setValue(newRessource);
-            //TODO does not work
-            //TaskCreation.lastTaskCreated.setHasRessource(true);
             //displaying a success toast
             Toast.makeText(this, "resource added", Toast.LENGTH_LONG).show();
             return 0;
